@@ -9,10 +9,10 @@
     "file": "LICENSE"
   },
   "authors": {
-    "335074307@qq.com": "oncwnuOFQIPUqFMr48EisEyZQvmM@git.weixin.qq.com"
+    "335074307@qq.com": ""
   },
   "source": {
-    "git": "https://github.com/335074307@qq.com/STRIAPManagerUtils.git",
+    "git": "https://github.com/niefeian/STRIAPManagerUtils.git",
     "tag": "0.0.1"
   },
   "platforms": {
