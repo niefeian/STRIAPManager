@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "STRIAPManager.h"
 
 FOUNDATION_EXPORT double STRIAPManagerUtilsVersionNumber;
 FOUNDATION_EXPORT const unsigned char STRIAPManagerUtilsVersionString[];
