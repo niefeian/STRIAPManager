@@ -13,7 +13,7 @@ typedef enum {
     SIAPPurchNotArrow = 5,      // 不允许内购
 }SIAPPurchType;
 
-typedef void (^IAPCompletionHandle)(SIAPPurchType type,NSData *data,NSString *key);
+typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , NSString *key , NSString *para);
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
@@ -23,8 +23,9 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
 + (instancetype)shareSIAPManager;
 
+- (void)setCompleteHandle:(IAPCompletionHandle)handle;
 //开始内购
-- (void)startPurchWithID:(NSString *)purchID completeHandle:(IAPCompletionHandle)handle;
+- (void)startPurchWithID:(NSString *)purchID para:(NSString *)para ;
 
 - (void)restoreCompletedTransactions;
 
@@ -33,6 +34,7 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 //完结掉所有旧的订单
 - (void)finishAllTransaction;
 
+-(void)finishTransactionByKey:(NSString *)key;
 //重新设置代理
 - (void)reloadTransactionObserver;
 

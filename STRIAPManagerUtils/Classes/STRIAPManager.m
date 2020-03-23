@@ -26,6 +26,7 @@
     IAPCompletionHandle _handle;
     IAPSubscribeHandle _subhandle;
     NSMutableDictionary *_map;
+    NSString *_para;
 }
 @end
 @implementation STRIAPManager
@@ -57,9 +58,10 @@
     if (transactions.count > 0) {
         for (SKPaymentTransaction* transaction in transactions){
             if (transaction.transactionState == SKPaymentTransactionStatePurchased) {
-             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             }
         }
+        [_map removeAllObjects];
     }
 }
 
@@ -67,6 +69,7 @@
     SKPaymentTransaction *transaction = [_map objectForKey:key];
     if (transaction) {
         [self finishTransaction:transaction];
+        [_map removeObjectForKey:key];
     }
 }
 
@@ -106,25 +109,29 @@
 
 }
 
+#pragma mark - 设置订单信息的回调
+- (void)setCompleteHandle:(IAPCompletionHandle)handle{
+     _handle = handle;
+}
+
 #pragma mark - 🚪public
-- (void)startPurchWithID:(NSString *)purchID completeHandle:(IAPCompletionHandle)handle{
+- (void)startPurchWithID:(NSString *)purchID para:(NSString *)para {
     if (purchID) {
         if ([SKPaymentQueue canMakePayments]) {
             // 开始购买服务
             _purchID = purchID;
-            _handle = handle;
+           
+            _para = para;
             NSSet *nsset = [NSSet setWithArray:@[purchID]];
             SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
             request.delegate = self;
             [request start];
-        }else{
-            [self handleActionWithType:SIAPPurchNotArrow data:nil key:@""];
         }
     }
 }
 
 #pragma mark - 🔒private
-- (void)handleActionWithType:(SIAPPurchType)type data:(NSData *)data key:(NSString *)key{
+- (void)handleActionWithType:(SIAPPurchType)type data:(NSData *)data key:(NSString *)key para:(NSString *)para {
     NSString *tips = @"";
     switch (type) {
         case SIAPPurchSuccess:
@@ -154,9 +161,7 @@
     #endif
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:tips];
     if(_handle){
-        _handle(type,data,key);
-    }else{
-        
+        _handle(type,data,key,para);
     }
 }
 
@@ -171,31 +176,12 @@
 // 交易失败
 - (void)failedTransaction:(SKPaymentTransaction *)transaction{
     if (transaction.error.code != SKErrorPaymentCancelled) {
-        [self handleActionWithType:SIAPPurchFailed data:nil key:@""];
+        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@""];
     }else{
-        [self handleActionWithType:SIAPPurchCancle data:nil key:@""];
+        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@""];
     }
     
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-}
-
-
-//随机生成一个字符串，作为key
-- (NSString *)randomStringWithNumber:(NSInteger)number{ //number 是需要的个数
-    NSString *ramdom;
-    NSMutableArray *array = [NSMutableArray array];
-    for (int i = 1; i ; i ++) {
-    int a = (arc4random() % 122); //如需要可以改变数值大小  这儿的数值是ASCII值
-    if (a > 96) { //这儿是小写字母 如需要自行更改
-        char c = (char)a;
-        [array addObject:[NSString stringWithFormat:@"%c",c]];
-        if (array.count == number) {
-            break;
-        }
-    } else continue;
-    }
-    ramdom = [array componentsJoinedByString:@""];//这个是把数组转换为字符串
-    return ramdom;
 }
 
 - (NSData *)verifyPurchase{
@@ -216,14 +202,13 @@
     
     if(!receipt){
         // 交易凭证为空验证失败  是否要完结订单？ 存在付了钱但是订单没回来的情况
-        [self handleActionWithType:SIAPPurchVerFailed data:nil key:@""];
+        [self handleActionWithType:SIAPPurchVerFailed data:nil key:@"" para:@""];
         return;
     }
     
     // 购买成功将交易凭证发送给服务端进行再次校验
     [_map setObject:transaction forKey:transaction.transactionIdentifier];
-    [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier];
-   
+    [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
 }
 
 #pragma mark - SKProductsRequestDelegate
@@ -254,8 +239,9 @@
     NSLog(@"%@",[p productIdentifier]);
     NSLog(@"发送购买请求");
 #endif
-    
-    SKPayment *payment = [SKPayment paymentWithProduct:p];
+
+    SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:p];
+    payment.applicationUsername = _para;
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
@@ -277,6 +263,7 @@
 
 #pragma mark - SKPaymentTransactionObserver
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
+    NSLog(@"--------------updatedTransactions------------------");
     for (SKPaymentTransaction *tran in transactions) {
         switch (tran.transactionState) {
             case SKPaymentTransactionStatePurchased:
