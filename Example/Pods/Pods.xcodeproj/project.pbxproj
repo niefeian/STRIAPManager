@@ -1,0 +1,603 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A3FE109FD6BE8BA4211D97EDD517332 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		8D319491CC9234648572B552E3938F7C /* STRIAPManagerUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BD5EC1BE4330C5B01339451DBACBC602 /* STRIAPManagerUtils-dummy.m */; };
+		A665D01B242864A3007D97CB /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A665D019242864A3007D97CB /* STRIAPManager.h */; };
+		A665D01C242864A3007D97CB /* STRIAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A665D01A242864A3007D97CB /* STRIAPManager.m */; };
+		D06B75BAD83FE325610594776EA1E6B1 /* STRIAPManagerUtils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B155D0E5DAE6EC600B022CFF50671CF /* STRIAPManagerUtils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EC55C5AC8CFEBC24DFBA79A16E736A2C /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */; };
+		F8154891F6164078EAAA9E95315529EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		87F27F4FA95DF4120FAFBA9DE9DD16F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4026C6DEF0A1BF2E2332DE8277391ADC;
+			remoteInfo = STRIAPManagerUtils;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C3F21D9937AED8CAD807EEEDC4F4E47 /* Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		1D3973B10A30B5C967ED8B3B3F57C6EC /* STRIAPManagerUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STRIAPManagerUtils.modulemap; sourceTree = "<group>"; };
+		2FFF3FF2DEF08FAE855AD03684984773 /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		312A0C05E8AEEA1EAC83562C6F7391D7 /* Pods-STRIAPManagerUtils_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-Info.plist"; sourceTree = "<group>"; };
+		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		35BE322BE3FD2792FB227F1DBFAE4E87 /* STRIAPManagerUtils.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.xcconfig; sourceTree = "<group>"; };
+		4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STRIAPManagerUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STRIAPManagerUtils_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STRIAPManagerUtils_Tests-umbrella.h"; sourceTree = "<group>"; };
+		6C52EBAF0DCDEB4B0BA2AD0013FE556E /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6F384214F0494606ED48069641B8BBBA /* Pods-STRIAPManagerUtils_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		7B155D0E5DAE6EC600B022CFF50671CF /* STRIAPManagerUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-umbrella.h"; sourceTree = "<group>"; };
+		7C035980C9DC16EDFB1D41E5B36AAEDB /* Pods-STRIAPManagerUtils_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-STRIAPManagerUtils_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STRIAPManagerUtils_Tests-dummy.m"; sourceTree = "<group>"; };
+		93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F9F44C41CAEB52D327EB4BF1463ED98 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A665D019242864A3007D97CB /* STRIAPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = STRIAPManager.h; path = STRIAPManagerUtils/Classes/STRIAPManager.h; sourceTree = "<group>"; };
+		A665D01A242864A3007D97CB /* STRIAPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = STRIAPManager.m; path = STRIAPManagerUtils/Classes/STRIAPManager.m; sourceTree = "<group>"; };
+		BD5EC1BE4330C5B01339451DBACBC602 /* STRIAPManagerUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "STRIAPManagerUtils-dummy.m"; sourceTree = "<group>"; };
+		C398DE6DAD3FDBECCC1F9F2F2E805F8F /* STRIAPManagerUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STRIAPManagerUtils-Info.plist"; sourceTree = "<group>"; };
+		C7BFC5D5E2CA3D1F0674143BEBF61EFC /* STRIAPManagerUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-prefix.pch"; sourceTree = "<group>"; };
+		DB1E25C2F4C4399A5C8DD40AFA423BC6 /* Pods-STRIAPManagerUtils_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-STRIAPManagerUtils_Tests.modulemap"; sourceTree = "<group>"; };
+		E5A990289F449CDA25E3595BC081A6CE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5748E10C7CCDF1246A45CBD37F4FCC11 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8154891F6164078EAAA9E95315529EA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0F81B6F0FB21DFC93461B9AA8A68788 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A3FE109FD6BE8BA4211D97EDD517332 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		188C397A10F8D46C34793953A45A7085 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				E5A990289F449CDA25E3595BC081A6CE /* LICENSE */,
+				9F9F44C41CAEB52D327EB4BF1463ED98 /* README.md */,
+				6C52EBAF0DCDEB4B0BA2AD0013FE556E /* STRIAPManagerUtils.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		37492FD79F6F6BA246BE839CD678E01A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6082CC1D3BE1D1612F729D74A4D8AF8D /* Pods-STRIAPManagerUtils_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		47CCDD086A84AF346E389074777CCBA9 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4F763E436072CB6599281A87EB296167 /* STRIAPManagerUtils */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		4F763E436072CB6599281A87EB296167 /* STRIAPManagerUtils */ = {
+			isa = PBXGroup;
+			children = (
+				A665D019242864A3007D97CB /* STRIAPManager.h */,
+				A665D01A242864A3007D97CB /* STRIAPManager.m */,
+				188C397A10F8D46C34793953A45A7085 /* Pod */,
+				FAFC43D518760BDBC6DBF37A5F72ED33 /* Support Files */,
+			);
+			name = STRIAPManagerUtils;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		6082CC1D3BE1D1612F729D74A4D8AF8D /* Pods-STRIAPManagerUtils_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				DB1E25C2F4C4399A5C8DD40AFA423BC6 /* Pods-STRIAPManagerUtils_Tests.modulemap */,
+				0C3F21D9937AED8CAD807EEEDC4F4E47 /* Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown */,
+				6F384214F0494606ED48069641B8BBBA /* Pods-STRIAPManagerUtils_Tests-acknowledgements.plist */,
+				829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */,
+				7C035980C9DC16EDFB1D41E5B36AAEDB /* Pods-STRIAPManagerUtils_Tests-frameworks.sh */,
+				312A0C05E8AEEA1EAC83562C6F7391D7 /* Pods-STRIAPManagerUtils_Tests-Info.plist */,
+				6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */,
+				2FFF3FF2DEF08FAE855AD03684984773 /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */,
+				93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */,
+			);
+			name = "Pods-STRIAPManagerUtils_Tests";
+			path = "Target Support Files/Pods-STRIAPManagerUtils_Tests";
+			sourceTree = "<group>";
+		};
+		92157685D36E7E1A2630C821226EC2B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */,
+				4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				47CCDD086A84AF346E389074777CCBA9 /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				92157685D36E7E1A2630C821226EC2B8 /* Products */,
+				37492FD79F6F6BA246BE839CD678E01A /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FAFC43D518760BDBC6DBF37A5F72ED33 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1D3973B10A30B5C967ED8B3B3F57C6EC /* STRIAPManagerUtils.modulemap */,
+				35BE322BE3FD2792FB227F1DBFAE4E87 /* STRIAPManagerUtils.xcconfig */,
+				BD5EC1BE4330C5B01339451DBACBC602 /* STRIAPManagerUtils-dummy.m */,
+				C398DE6DAD3FDBECCC1F9F2F2E805F8F /* STRIAPManagerUtils-Info.plist */,
+				C7BFC5D5E2CA3D1F0674143BEBF61EFC /* STRIAPManagerUtils-prefix.pch */,
+				7B155D0E5DAE6EC600B022CFF50671CF /* STRIAPManagerUtils-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/STRIAPManagerUtils";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		118600760D28FB7098374E2B474C6D9B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D06B75BAD83FE325610594776EA1E6B1 /* STRIAPManagerUtils-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FBAC6A10FF261CA492F3397C1798D75 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */,
+				A665D01B242864A3007D97CB /* STRIAPManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4026C6DEF0A1BF2E2332DE8277391ADC /* STRIAPManagerUtils */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F95A052AB983CAC85BD37BFA2FA7CB92 /* Build configuration list for PBXNativeTarget "STRIAPManagerUtils" */;
+			buildPhases = (
+				118600760D28FB7098374E2B474C6D9B /* Headers */,
+				1BA6AE0409D02777FE516AB2AAF30F6E /* Sources */,
+				B0F81B6F0FB21DFC93461B9AA8A68788 /* Frameworks */,
+				F7138119F5DCE223EB709496580251F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = STRIAPManagerUtils;
+			productName = STRIAPManagerUtils;
+			productReference = 4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CCBCEB66CA572998D76ED7BF7217898F /* Pods-STRIAPManagerUtils_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2582C5960736C7AA17BE41635110DF96 /* Build configuration list for PBXNativeTarget "Pods-STRIAPManagerUtils_Tests" */;
+			buildPhases = (
+				7FBAC6A10FF261CA492F3397C1798D75 /* Headers */,
+				5F806DA10A165BD9E76BF50B691CDC9E /* Sources */,
+				5748E10C7CCDF1246A45CBD37F4FCC11 /* Frameworks */,
+				4E09E06FCDC1EC7E238AFFA7635B7050 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8EBD178146006C4C0EF416730820470B /* PBXTargetDependency */,
+			);
+			name = "Pods-STRIAPManagerUtils_Tests";
+			productName = "Pods-STRIAPManagerUtils_Tests";
+			productReference = 5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 92157685D36E7E1A2630C821226EC2B8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CCBCEB66CA572998D76ED7BF7217898F /* Pods-STRIAPManagerUtils_Tests */,
+				4026C6DEF0A1BF2E2332DE8277391ADC /* STRIAPManagerUtils */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4E09E06FCDC1EC7E238AFFA7635B7050 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7138119F5DCE223EB709496580251F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1BA6AE0409D02777FE516AB2AAF30F6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D319491CC9234648572B552E3938F7C /* STRIAPManagerUtils-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5F806DA10A165BD9E76BF50B691CDC9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A665D01C242864A3007D97CB /* STRIAPManager.m in Sources */,
+				EC55C5AC8CFEBC24DFBA79A16E736A2C /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8EBD178146006C4C0EF416730820470B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = STRIAPManagerUtils;
+			target = 4026C6DEF0A1BF2E2332DE8277391ADC /* STRIAPManagerUtils */;
+			targetProxy = 87F27F4FA95DF4120FAFBA9DE9DD16F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0D383B035353F7BED42DEC46C347ADE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1CFE011AF270547828D0E70E8A88F453 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FFF3FF2DEF08FAE855AD03684984773 /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2DC0483F892D69B783DC4E5CD0DD7B29 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35BE322BE3FD2792FB227F1DBFAE4E87 /* STRIAPManagerUtils.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils.modulemap";
+				PRODUCT_MODULE_NAME = STRIAPManagerUtils;
+				PRODUCT_NAME = STRIAPManagerUtils;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		79DD33D6269DCC84F00B2742590E21D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35BE322BE3FD2792FB227F1DBFAE4E87 /* STRIAPManagerUtils.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils.modulemap";
+				PRODUCT_MODULE_NAME = STRIAPManagerUtils;
+				PRODUCT_NAME = STRIAPManagerUtils;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B0087CB4594321EF41619F3181FE120E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2582C5960736C7AA17BE41635110DF96 /* Build configuration list for PBXNativeTarget "Pods-STRIAPManagerUtils_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CFE011AF270547828D0E70E8A88F453 /* Debug */,
+				0D383B035353F7BED42DEC46C347ADE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */,
+				B0087CB4594321EF41619F3181FE120E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F95A052AB983CAC85BD37BFA2FA7CB92 /* Build configuration list for PBXNativeTarget "STRIAPManagerUtils" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				79DD33D6269DCC84F00B2742590E21D9 /* Debug */,
+				2DC0483F892D69B783DC4E5CD0DD7B29 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

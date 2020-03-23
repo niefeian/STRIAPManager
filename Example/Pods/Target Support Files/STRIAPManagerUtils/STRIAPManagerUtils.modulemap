@@ -1,0 +1,6 @@
+framework module STRIAPManagerUtils {
+  umbrella header "STRIAPManagerUtils-umbrella.h"
+
+  export *
+  module * { export * }
+}

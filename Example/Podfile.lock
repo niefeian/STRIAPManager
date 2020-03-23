@@ -1,0 +1,16 @@
+PODS:
+  - STRIAPManagerUtils (0.1.0)
+
+DEPENDENCIES:
+  - STRIAPManagerUtils (from `../`)
+
+EXTERNAL SOURCES:
+  STRIAPManagerUtils:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  STRIAPManagerUtils: 7a147142385c0190e1ebd634570b2ef17e47eae4
+
+PODFILE CHECKSUM: 9b9ae356a144843fcbcd6a97b3174df3fda621f8
+
+COCOAPODS: 1.8.4
