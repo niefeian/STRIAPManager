@@ -13,6 +13,7 @@ typedef enum {
     SIAPPurchNotArrow = 5,      // 不允许内购
 }SIAPPurchType;
 
+// key -> transaction.transactionIdentifier
 typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , NSString *key , NSString *para);
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
@@ -24,6 +25,7 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 + (instancetype)shareSIAPManager;
 
 - (void)setCompleteHandle:(IAPCompletionHandle)handle;
+
 //开始内购
 - (void)startPurchWithID:(NSString *)purchID para:(NSString *)para ;
 
@@ -41,7 +43,8 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 //这个是会员恢复用的
 - (void)verifySubscribe:(IAPSubscribeHandle)handle;
 
-
+//失败的时候进行一次测试
+-(void)testTransaction;
 @end
 
 NS_ASSUME_NONNULL_END

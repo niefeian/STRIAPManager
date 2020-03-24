@@ -38,7 +38,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken,^{
         IAPManager = [[STRIAPManager alloc] init];
-       
     });
     return IAPManager;
 }
@@ -65,6 +64,61 @@
     }
 }
 
+
+-(void)testTransaction{
+
+    NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
+    NSError *error;
+    NSDictionary *requestContents = @{
+                      @"receipt-data": [receipt base64EncodedStringWithOptions:0]
+                      };
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestContents
+                                          options:0
+                                            error:&error];
+
+
+
+    //In the test environment, use https://sandbox.itunes.apple.com/verifyReceipt
+    //In the real environment, use https://buy.itunes.apple.com/verifyReceipt
+
+    NSString *serverString = @"https://sandbox.itunes.apple.com/verifyReceipt";
+
+    NSURL *storeURL = [NSURL URLWithString:serverString];
+    NSMutableURLRequest *storeRequest = [NSMutableURLRequest requestWithURL:storeURL];
+    [storeRequest setHTTPMethod:@"POST"];
+    [storeRequest setHTTPBody:requestData];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:storeRequest queue:queue
+           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+               if (connectionError) {
+                   // 无法连接服务器,购买校验失败
+                  
+                   
+               } else {
+                   NSError *error;
+                   NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                   if (!jsonResponse) {
+                       // 苹果服务器校验数据返回为空校验失败
+                     
+                   }
+                   
+                   // 先验证正式服务器,如果正式服务器返回21007再去苹果测试服务器验证,沙盒测试环境苹果用的是测试服务器
+                   NSString *status = [NSString stringWithFormat:@"%@",jsonResponse[@"status"]];
+                   if (status && [status isEqualToString:@"21007"]) {
+                   
+                       
+                   }else if(status && [status isEqualToString:@"0"]){
+                     
+                   }
+    #if DEBUG
+                   NSLog(@"----验证结果 %@",jsonResponse);
+    #endif
+               }
+           }];
+}
+
 -(void)finishTransactionByKey:(NSString *)key{
     SKPaymentTransaction *transaction = [_map objectForKey:key];
     if (transaction) {
@@ -79,8 +133,17 @@
 
 //重新设置代理 将会在 updatedTransactions 收到未完结订单的信息
 -(void)reloadTransactionObserver{
-     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        /*重设KVO的方式依旧会存在页面卡死在Loding页的情况*/
+//     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+//     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    
+    //将数据存在 _map ,支付完成的数据都会在这边 ，然后通过 key - value 进行完结指定的订单
+    NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
+    for (SKPaymentTransaction * transaction in _map.allValues) {
+        [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+    }
+    // 购买成功将交易凭证发送给服务端进行再次校验
 }
 
 -(void)removeTransactionObserver{
@@ -242,6 +305,7 @@
 
     SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:p];
     payment.applicationUsername = _para;
+    
     [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
