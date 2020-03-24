@@ -1,5 +1,5 @@
 PODS:
-  - STRIAPManagerUtils (0.0.3)
+  - STRIAPManagerUtils (0.0.4)
 
 DEPENDENCIES:
   - STRIAPManagerUtils (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  STRIAPManagerUtils: 3b2ac9f363c0f11105ebd4ac75a8add836ac9d6d
+  STRIAPManagerUtils: b00fd694e64d63c5f09792aa28c094e339cdc318
 
 PODFILE CHECKSUM: 9b9ae356a144843fcbcd6a97b3174df3fda621f8
 

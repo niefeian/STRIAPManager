@@ -26,6 +26,7 @@
     IAPCompletionHandle _handle;
     IAPSubscribeHandle _subhandle;
     NSMutableDictionary *_map;
+    NSTimer *timer;
     NSString *_para;
 }
 @end
@@ -47,6 +48,10 @@
     if (self) {
          _map = [[NSMutableDictionary alloc] init];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
+        timer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(reloadTransactionObserver) userInfo:nil repeats:YES];
+
+//        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }
     return self;
 }
@@ -138,10 +143,12 @@
 //     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
     
     //将数据存在 _map ,支付完成的数据都会在这边 ，然后通过 key - value 进行完结指定的订单
-    NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
-    NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
-    for (SKPaymentTransaction * transaction in _map.allValues) {
-        [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+    if (_map != nil && _map.allValues.count > 0) {
+        NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
+        NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
+        for (SKPaymentTransaction * transaction in _map.allValues) {
+            [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+        }
     }
     // 购买成功将交易凭证发送给服务端进行再次校验
 }
@@ -328,7 +335,7 @@
 #pragma mark - SKPaymentTransactionObserver
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
     NSLog(@"--------------updatedTransactions------------------");
-    for (SKPaymentTransaction *tran in transactions) {
+    for (SKPaymentTransaction *tran in [transactions reverseObjectEnumerator]) {
         switch (tran.transactionState) {
             case SKPaymentTransactionStatePurchased:
                 [self completeTransaction:tran];
@@ -349,6 +356,7 @@
                 [self failedTransaction:tran];
                 break;
             default:
+                [[SKPaymentQueue defaultQueue] finishTransaction:tran];
                 break;
         }
     }
