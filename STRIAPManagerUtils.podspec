@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'STRIAPManagerUtils'
-  s.version          = '0.0.4'
+  s.version          = '0.0.5'
   s.summary          = '内购封装'
 
 # This description is used to generate tags and improve search results.
@@ -24,7 +24,7 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/niefeian/STRIAPManager'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '335074307@qq.com' => '' }
+  s.author           = { '' => '' }
   s.source           = { :git => 'https://github.com/niefeian/STRIAPManager.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 

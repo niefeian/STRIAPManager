@@ -50,11 +50,58 @@
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
         timer =  [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(reloadTransactionObserver) userInfo:nil repeats:YES];
-
-//        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }
     return self;
 }
+
+
+#pragma mark - 设置订单信息的回调
+- (void)setCompleteHandle:(IAPCompletionHandle)handle{
+     _handle = handle;
+}
+
+#pragma mark - 🚪public
+- (void)startPurchWithID:(NSString *)purchID para:(NSString *)para {
+    if (purchID) {
+        if ([SKPaymentQueue canMakePayments]) {
+            // 开始购买服务
+            _purchID = purchID;
+            _para = para;
+            NSSet *nsset = [NSSet setWithArray:@[purchID]];
+            SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
+            request.delegate = self;
+            [request start];
+        }
+    }
+}
+
+
+//根据 key 完结掉指定订单
+-(void)finishTransactionByKey:(NSString *)key{
+    SKPaymentTransaction *transaction = [_map objectForKey:key];
+    if (transaction) {
+         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+        [_map removeObjectForKey:key];
+    }
+}
+
+
+-(void)reloadTransactionObserver{
+        /*重设KVO的方式依旧会存在页面卡死在Loding页的情况*/
+//     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+//     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    
+    //将数据存在 _map ,支付完成的数据都会在这边 ，然后通过 key - value 进行完结指定的订单
+    if (_map != nil && _map.allValues.count > 0) {
+        NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
+        NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
+        for (SKPaymentTransaction * transaction in _map.allValues) {
+            [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+        }
+    }
+    // 购买成功将交易凭证发送给服务端进行再次校验
+}
+
 
 //完结掉所有旧的订单
 -(void)finishAllTransaction{
@@ -69,8 +116,8 @@
     }
 }
 
-
--(void)testTransaction{
+#pragma mark -  订单校验 前端测试用
+- (void)testTransaction{
 
     NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
     NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
@@ -124,81 +171,6 @@
            }];
 }
 
--(void)finishTransactionByKey:(NSString *)key{
-    SKPaymentTransaction *transaction = [_map objectForKey:key];
-    if (transaction) {
-        [self finishTransaction:transaction];
-        [_map removeObjectForKey:key];
-    }
-}
-
--(void)finishTransaction:(SKPaymentTransaction *)transaction{
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-}
-
-//重新设置代理 将会在 updatedTransactions 收到未完结订单的信息
--(void)reloadTransactionObserver{
-        /*重设KVO的方式依旧会存在页面卡死在Loding页的情况*/
-//     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-//     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    
-    //将数据存在 _map ,支付完成的数据都会在这边 ，然后通过 key - value 进行完结指定的订单
-    if (_map != nil && _map.allValues.count > 0) {
-        NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
-        NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
-        for (SKPaymentTransaction * transaction in _map.allValues) {
-            [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
-        }
-    }
-    // 购买成功将交易凭证发送给服务端进行再次校验
-}
-
--(void)removeTransactionObserver{
-     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-}
-
-
-- (void)verifySubscribe:(IAPSubscribeHandle)handle{
-    _subhandle = handle;
-}
-
--(void)restoreCompletedTransactions{
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-}
-
-- (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
-     NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
-        for (SKPaymentTransaction *transaction in queue.transactions){
-            NSString *productID = transaction.payment.productIdentifier;
-            [purchasedItemIDs addObject:productID];
-        }
-        
-        if(_subhandle){
-          _subhandle(purchasedItemIDs);
-        }
-
-}
-
-#pragma mark - 设置订单信息的回调
-- (void)setCompleteHandle:(IAPCompletionHandle)handle{
-     _handle = handle;
-}
-
-#pragma mark - 🚪public
-- (void)startPurchWithID:(NSString *)purchID para:(NSString *)para {
-    if (purchID) {
-        if ([SKPaymentQueue canMakePayments]) {
-            // 开始购买服务
-            _purchID = purchID;
-           
-            _para = para;
-            NSSet *nsset = [NSSet setWithArray:@[purchID]];
-            SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
-            request.delegate = self;
-            [request start];
-        }
-    }
-}
 
 #pragma mark - 🔒private
 - (void)handleActionWithType:(SIAPPurchType)type data:(NSData *)data key:(NSString *)key para:(NSString *)para {
@@ -235,6 +207,28 @@
     }
 }
 
+
+#pragma mark - 以下涉及到自动续订会员恢复
+-(void)restoreCompletedTransactions{
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+}
+
+- (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
+     NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
+        for (SKPaymentTransaction *transaction in queue.transactions){
+            NSString *productID = transaction.payment.productIdentifier;
+            [purchasedItemIDs addObject:productID];
+        }
+        
+        if(_subhandle){
+          _subhandle(purchasedItemIDs);
+        }
+
+}
+
+- (void)verifySubscribe:(IAPSubscribeHandle)handle{
+    _subhandle = handle;
+}
 
 #pragma mark - 🍐delegate
 // 交易结束

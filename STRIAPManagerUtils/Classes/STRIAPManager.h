@@ -14,37 +14,60 @@ typedef enum {
 }SIAPPurchType;
 
 // key -> transaction.transactionIdentifier
+/*
+    type -> SIAPPurchType 购买状态
+    data -> 回执
+    key -> 流水号 收到服务端结果后前端根据 流水号完结指定订单
+    para -> 参数
+ */
 typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , NSString *key , NSString *para);
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
 
-
 @interface STRIAPManager : NSObject
 
+/*
+    单利
+ */
 + (instancetype)shareSIAPManager;
 
+/*
+    设置订单回调，所有购买都从一个入口去h处理 根据 IAPCompletionHandle 区分订单
+ */
 - (void)setCompleteHandle:(IAPCompletionHandle)handle;
 
-//开始内购
+/*
+    开启内购
+    purchID -> 商品id
+    para -> 订单参数
+ */
 - (void)startPurchWithID:(NSString *)purchID para:(NSString *)para ;
 
-- (void)restoreCompletedTransactions;
+//完结掉所有旧的订单 谨慎使用
+//- (void)finishAllTransaction;
 
-- (NSData *)verifyPurchase;
-
-//完结掉所有旧的订单
-- (void)finishAllTransaction;
-
+/*
+    根据 key 完结掉指定订单
+ */
 -(void)finishTransactionByKey:(NSString *)key;
-//重新设置代理
+
+
+/*
+    刷新订单列表，检查是否有未完成的订单
+    内部有通过定时器进行调用
+    外部可以在重新联网、应用进入前台等情况调用
+ */
 - (void)reloadTransactionObserver;
 
-//这个是会员恢复用的
+
+#pragma mark - 以下涉及到自动续订会员恢复
+- (void)restoreCompletedTransactions;
+
 - (void)verifySubscribe:(IAPSubscribeHandle)handle;
 
-//失败的时候进行一次测试
--(void)testTransaction;
+#pragma mark -  订单校验 前端s测试用
+- (void)testTransaction;
 @end
 
 NS_ASSUME_NONNULL_END
