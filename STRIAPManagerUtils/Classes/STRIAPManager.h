@@ -20,7 +20,7 @@ typedef enum {
     key -> 流水号 收到服务端结果后前端根据 流水号完结指定订单
     para -> 参数
  */
-typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , NSString *key , NSString *para);
+typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para , NSString *tmpid ,  NSString *transactionIdentifier , NSString *orderId );
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
@@ -42,7 +42,7 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
     purchID -> 商品id
     para -> 订单参数
  */
-- (void)startPurchWithID:(NSString *)purchID para:(NSString *)para ;
+- (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid;
 
 //完结掉所有旧的订单 谨慎使用
 //- (void)finishAllTransaction;
@@ -68,6 +68,8 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
 #pragma mark -  订单校验 前端s测试用
 - (void)testTransaction;
+
+- (NSData *)verifyPurchase;
 @end
 
 NS_ASSUME_NONNULL_END
