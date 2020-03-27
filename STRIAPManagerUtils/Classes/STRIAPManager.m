@@ -468,7 +468,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 - (void)requestDidFinish:(SKRequest *)request{
     #if DEBUG
-      NSLog(@"------------------反馈信息结束-----------------:%@");
+      NSLog(@"------------------反馈信息结束-----------------");
      [self blockLogTransactionIdentifier:@"" desc:@"反馈信息结束" info:@""];
     #endif
 }
