@@ -21,11 +21,14 @@
 #import "STRIAPManager.h"
 #import <StoreKit/StoreKit.h>
 
+NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver";
+
 @interface STRIAPManager()<SKPaymentTransactionObserver,SKProductsRequestDelegate>{
     NSString           *_purchID;
     IAPCompletionHandle _handle;
     IAPSubscribeHandle _subhandle;
     IAPLogHandle _log;
+    BOOL _reloading;
     NSInteger index;
     NSMutableArray *_lodingKey;
     NSMutableArray *_finishKeys;
@@ -56,6 +59,7 @@
         //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
         index = 0;
         timer =  [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(reloadErrorfinishTransaction) userInfo:nil repeats:YES];
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTransactionObserver) name:ReloadTransactionObserver object:nil];
     }
     return self;
 }
@@ -109,17 +113,17 @@
 
 
 //根据 key 完结掉指定订单
--(void)finishTransactionByKey:(NSString *)key{
+-(void)finishTransactionByTransactionIdentifier:(NSString *)transactionIdentifier;{
 //    SKPaymentTransaction *transaction = [_map objectForKey:key];
 //    if (transaction) {
 //         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 //        [_map removeObjectForKey:key];
 //    }
-        [_finishKeys addObject:key];
+        [_finishKeys addObject:transactionIdentifier];
         NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
         if (transactions.count > 0) {
         for (SKPaymentTransaction* transaction in transactions){
-              if (transaction.transactionIdentifier == key) {
+              if (transaction.transactionIdentifier == transactionIdentifier) {
                   [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             }
         }
@@ -131,18 +135,28 @@
         /*重设KVO的方式依旧会存在页面卡死在Loding页的情况*/
 //     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 //     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-
-        NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
-       if (transactions.count > 0 && _lodingKey.count > 0) {
-            NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
-            NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
-           for (SKPaymentTransaction* transaction in transactions){
-               if (transaction.transactionState == SKPaymentTransactionStatePurchased && [_lodingKey containsObject:transaction.transactionIdentifier]) {
-                    [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
-                   return;
-               }
+    if (_reloading){
+        return;
+    }
+    _reloading = YES;
+    double delayInSeconds = 5.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        self->_reloading = NO;
+    });
+    
+    index = 1;
+    NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+   if (transactions.count > 0 && _lodingKey.count > 0) {
+        NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
+        NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
+       for (SKPaymentTransaction* transaction in transactions){
+           if (transaction.transactionState == SKPaymentTransactionStatePurchased && [_lodingKey containsObject:transaction.transactionIdentifier]) {
+                [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+               return;
            }
        }
+   }
 }
 
 
@@ -441,6 +455,7 @@
       [self blockLogTransactionIdentifier:@"" desc:@"用户取消操作" info:@""];
       [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消操作"];
 }
+
 //请求失败
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"当前网络不给力,请稍后再试~"];
@@ -453,6 +468,7 @@
 
 - (void)requestDidFinish:(SKRequest *)request{
     #if DEBUG
+      NSLog(@"------------------反馈信息结束-----------------:%@");
      [self blockLogTransactionIdentifier:@"" desc:@"反馈信息结束" info:@""];
     #endif
 }
@@ -489,13 +505,13 @@
                 break;
             case SKPaymentTransactionStateFailed:
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买失败" info:@""];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买失败" info:tran.error.localizedDescription];
                 #endif
                 [self failedTransaction:tran];
                 break;
             default:
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品出现未知状态" info:@""];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品出现未知状态" info:tran.error.localizedDescription];
                 #endif
                 [[SKPaymentQueue defaultQueue] finishTransaction:tran];
                 break;

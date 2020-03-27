@@ -3,6 +3,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+UIKIT_EXTERN NSNotificationName const ReloadTransactionObserver;
 
 typedef enum {
     SIAPPurchSuccess = 0,       // 购买成功
@@ -25,6 +26,11 @@ typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
 
+/*
+ transactionIdentifier 流水号
+ desc 报错描述
+ info 报错信息
+ */
 typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,NSString * info);
 
 
@@ -53,7 +59,7 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 /*
     根据 key 完结掉指定订单
  */
--(void)finishTransactionByKey:(NSString *)key;
+-(void)finishTransactionByTransactionIdentifier:(NSString *)transactionIdentifier;
 
 
 /*
@@ -72,12 +78,11 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 #pragma mark -  订单校验 前端s测试用
 - (void)testTransaction;
 
+//获取当前存在的回执
 - (NSData *)verifyPurchase;
 
 /*校验订单前端是否能成功*/
 - (void)testTransactionData:(NSData *)receipt index:(NSInteger)index;
-
-
 
 #pragma mark -  订单校验 添加log 回调 更新支付状态
 - (void)binLog:(IAPLogHandle)log;
