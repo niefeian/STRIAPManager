@@ -25,7 +25,7 @@ typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
 
-typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,,NSString * info);
+typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,NSString * info);
 
 
 @interface STRIAPManager : NSObject
