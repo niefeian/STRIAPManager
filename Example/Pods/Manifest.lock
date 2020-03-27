@@ -1,16 +1,23 @@
 PODS:
-  - STRIAPManagerUtils (0.0.4)
+  - NFASQLiteDB (0.0.1)
+  - STRIAPManagerUtils (0.0.6)
 
 DEPENDENCIES:
+  - NFASQLiteDB
   - STRIAPManagerUtils (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - NFASQLiteDB
 
 EXTERNAL SOURCES:
   STRIAPManagerUtils:
     :path: "../"
 
 SPEC CHECKSUMS:
-  STRIAPManagerUtils: b00fd694e64d63c5f09792aa28c094e339cdc318
+  NFASQLiteDB: cd375370d3c3549c1df2323dc4008678fb869d3d
+  STRIAPManagerUtils: fb5b913a90f4e7a077c18f5a27ecb02d57ad18f6
 
-PODFILE CHECKSUM: 9b9ae356a144843fcbcd6a97b3174df3fda621f8
+PODFILE CHECKSUM: 6061c52a48f572cab1d21e7ea86eb8f60a6cf3e1
 
 COCOAPODS: 1.9.1

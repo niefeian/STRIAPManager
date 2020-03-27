@@ -70,6 +70,11 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 - (void)testTransaction;
 
 - (NSData *)verifyPurchase;
+
+/*校验订单前端是否能成功*/
+- (void)testTransactionData:(NSData *)receipt index:(NSInteger)index;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -30,6 +30,7 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		8EF2782AC625EB9FB30A2232 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		9A56D887D19C45F5A753C7AD /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STRIAPManagerUtils_Tests.debug.xcconfig"; path = "Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A60E63DF242DB19A004547F6 /* NFASQLiteDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NFASQLiteDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8ADF8F8BBB610DC54B84DFD /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +71,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A60E63DF242DB19A004547F6 /* NFASQLiteDB.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
@@ -214,10 +216,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/NFASQLiteDB/NFASQLiteDB.framework",
 				"${BUILT_PRODUCTS_DIR}/STRIAPManagerUtils/STRIAPManagerUtils.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NFASQLiteDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STRIAPManagerUtils.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

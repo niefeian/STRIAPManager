@@ -225,6 +225,57 @@
 }
 
 
+- (void)testTransactionData:(NSData *)receipt index:(NSInteger)index{
+
+    NSError *error;
+    NSDictionary *requestContents = @{
+                      @"receipt-data": [receipt base64EncodedStringWithOptions:0]
+                      };
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:requestContents
+                                          options:0
+                                            error:&error];
+
+    //In the test environment, use https://sandbox.itunes.apple.com/verifyReceipt
+    //In the real environment, use https://buy.itunes.apple.com/verifyReceipt
+
+    NSString *serverString = @"https://sandbox.itunes.apple.com/verifyReceipt";
+
+    NSURL *storeURL = [NSURL URLWithString:serverString];
+    NSMutableURLRequest *storeRequest = [NSMutableURLRequest requestWithURL:storeURL];
+    [storeRequest setHTTPMethod:@"POST"];
+    [storeRequest setHTTPBody:requestData];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection sendAsynchronousRequest:storeRequest queue:queue
+           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+               if (connectionError) {
+                   // 无法连接服务器,购买校验失败
+                   NSLog(@"校验失败%ld",(long)index);
+                   
+               } else {
+                   NSError *error;
+                   NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+                   if (!jsonResponse) {
+                       // 苹果服务器校验数据返回为空校验失败
+                     
+                   }
+                   
+                   // 先验证正式服务器,如果正式服务器返回21007再去苹果测试服务器验证,沙盒测试环境苹果用的是测试服务器
+                   NSString *status = [NSString stringWithFormat:@"%@",jsonResponse[@"status"]];
+                   if (status && [status isEqualToString:@"21007"]) {
+                   
+                       
+                   }else if(status && [status isEqualToString:@"0"]){
+                       
+                   }
+    #if DEBUG
+                   NSLog(@"校验成功%ld",(long)index);
+                   NSLog(@"----验证结果 %@",jsonResponse);
+    #endif
+               }
+           }];
+}
+
 #pragma mark - 🔒private
 - (void)handleActionWithType:(SIAPPurchType)type data:(NSData *)data key:(NSString *)key para:(NSString *)para {
     NSString *tips = @"";
