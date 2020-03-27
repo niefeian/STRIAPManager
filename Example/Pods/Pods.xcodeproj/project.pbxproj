@@ -10,6 +10,7 @@
 		00520A933891A64D3D67FA5DBEF5B8E4 /* STRIAPManagerUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D956C48B786941005422956F3AB36E5 /* STRIAPManagerUtils-dummy.m */; };
 		075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9FE39E79E2BFD74199F6EEEA944A319E /* STRIAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */; };
+		A60E63EF242DC0D8004547F6 /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA3A73990ED9681F902AFE33162C0860 /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD5C51EF12376CB6417D79784181552 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		D7A7E4A71CFD0138CA4EE4F2AEEABC85 /* STRIAPManagerUtils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,23 +37,23 @@
 		312A0C05E8AEEA1EAC83562C6F7391D7 /* Pods-STRIAPManagerUtils_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-Info.plist"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3F8B9F4CDFF8F4654E3B6F28AA818A3D /* STRIAPManagerUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STRIAPManagerUtils-Info.plist"; sourceTree = "<group>"; };
-		4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = STRIAPManagerUtils.framework; path = STRIAPManagerUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_STRIAPManagerUtils_Tests.framework; path = "Pods-STRIAPManagerUtils_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STRIAPManagerUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STRIAPManagerUtils_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STRIAPManagerUtils_Tests-umbrella.h"; sourceTree = "<group>"; };
 		6F384214F0494606ED48069641B8BBBA /* Pods-STRIAPManagerUtils_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		6F4AF94652648F1F559736243A9023B8 /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6F4AF94652648F1F559736243A9023B8 /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STRIAPManager.m; path = STRIAPManagerUtils/Classes/STRIAPManager.m; sourceTree = "<group>"; };
 		7C035980C9DC16EDFB1D41E5B36AAEDB /* Pods-STRIAPManagerUtils_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-STRIAPManagerUtils_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STRIAPManagerUtils_Tests-dummy.m"; sourceTree = "<group>"; };
 		93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A4378AB99F0CE7FA1EA9A0EAE717C6FC /* STRIAPManagerUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STRIAPManagerUtils.modulemap; sourceTree = "<group>"; };
 		B009F982C5F3BD12D669947ABC9DB047 /* STRIAPManagerUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-prefix.pch"; sourceTree = "<group>"; };
 		D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.release.xcconfig; sourceTree = "<group>"; };
 		DB1E25C2F4C4399A5C8DD40AFA423BC6 /* Pods-STRIAPManagerUtils_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-STRIAPManagerUtils_Tests.modulemap"; sourceTree = "<group>"; };
 		E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-umbrella.h"; sourceTree = "<group>"; };
-		ED6F0581753EB574CA2C9996E9CF7861 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		FCD917557D62AA68CB16C9AB7F75147C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		ED6F0581753EB574CA2C9996E9CF7861 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		FCD917557D62AA68CB16C9AB7F75147C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */,
+				A60E63EF242DC0D8004547F6 /* STRIAPManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,8 +501,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
