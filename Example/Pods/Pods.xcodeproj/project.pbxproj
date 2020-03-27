@@ -8,98 +8,59 @@
 
 /* Begin PBXBuildFile section */
 		00520A933891A64D3D67FA5DBEF5B8E4 /* STRIAPManagerUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D956C48B786941005422956F3AB36E5 /* STRIAPManagerUtils-dummy.m */; };
-		236A0F17EF3788D1FD86E6881A9C8CB9 /* NFASQLiteDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 89CF7EFA594CBB313B46CA823DF83B95 /* NFASQLiteDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4B7BFCBA05809F7F3773771A5799CA7D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		51776F0A8858D6CA540ECBF966A22D98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		6D878C7AA69506B31101FC3C84552F3B /* NFASQLiteDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E42F36AA82A7B8F857EB199003C748F /* NFASQLiteDB-dummy.m */; };
-		751AD9248D151CFE7FF7EA914A721C66 /* NFASQLiteDB.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A08954C2E850D67719C313305419FF1E /* NFASQLiteDB.bundle */; };
+		075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9FE39E79E2BFD74199F6EEEA944A319E /* STRIAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */; };
-		AD9527915B11436E07511D17F9829113 /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C947CA08BAD374A86DC66E08DA4B02EA /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63144D227673539E4759FB04FB268978 /* SQLiteDB.swift */; };
 		CA3A73990ED9681F902AFE33162C0860 /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CAD5C51EF12376CB6417D79784181552 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		D5C7D3F03F73A3AFAAA00FC8670712E5 /* data.db in Resources */ = {isa = PBXBuildFile; fileRef = 94A3C8D0562C25F5DB6E545666C99718 /* data.db */; };
 		D7A7E4A71CFD0138CA4EE4F2AEEABC85 /* STRIAPManagerUtils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EFC15A165324EF738A2B27A6E3D3FE3B /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */; };
+		EC55C5AC8CFEBC24DFBA79A16E736A2C /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */; };
+		F8154891F6164078EAAA9E95315529EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		184E70E1DE511B7AB8B358998ED714E0 /* PBXContainerItemProxy */ = {
+		87F27F4FA95DF4120FAFBA9DE9DD16F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 4026C6DEF0A1BF2E2332DE8277391ADC;
 			remoteInfo = STRIAPManagerUtils;
 		};
-		C7ACF5209C04AE9DB7D940583B409AC3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A72AA0F658BB6424BA2924DBE6CE34E5;
-			remoteInfo = NFASQLiteDB;
-		};
-		D048A876AD88FB25A497D6DA5B26E853 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 58C1A3B16B27BA894A955F45BC283169;
-			remoteInfo = "NFASQLiteDB-NFASQLiteDB";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		030ECD964435D425449559D0F28FD4B3 /* STRIAPManagerUtils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.debug.xcconfig; sourceTree = "<group>"; };
 		0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STRIAPManager.h; path = STRIAPManagerUtils/Classes/STRIAPManager.h; sourceTree = "<group>"; };
-		0BF1301AACD2A9E5DE51AC737B0E5E56 /* ResourceBundle-NFASQLiteDB-NFASQLiteDB-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-NFASQLiteDB-NFASQLiteDB-Info.plist"; sourceTree = "<group>"; };
 		0C3F21D9937AED8CAD807EEEDC4F4E47 /* Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		2D956C48B786941005422956F3AB36E5 /* STRIAPManagerUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "STRIAPManagerUtils-dummy.m"; sourceTree = "<group>"; };
 		2FFF3FF2DEF08FAE855AD03684984773 /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		312A0C05E8AEEA1EAC83562C6F7391D7 /* Pods-STRIAPManagerUtils_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-Info.plist"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		3F8B9F4CDFF8F4654E3B6F28AA818A3D /* STRIAPManagerUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STRIAPManagerUtils-Info.plist"; sourceTree = "<group>"; };
-		4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STRIAPManagerUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E42F36AA82A7B8F857EB199003C748F /* NFASQLiteDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NFASQLiteDB-dummy.m"; sourceTree = "<group>"; };
-		4F4D8E937846DC7FAED6BCEF860585B9 /* NFASQLiteDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NFASQLiteDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STRIAPManagerUtils_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		63144D227673539E4759FB04FB268978 /* SQLiteDB.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLiteDB.swift; path = NFASQLiteDB/Classes/SQLiteDB.swift; sourceTree = "<group>"; };
+		4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = STRIAPManagerUtils.framework; path = STRIAPManagerUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_STRIAPManagerUtils_Tests.framework; path = "Pods-STRIAPManagerUtils_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STRIAPManagerUtils_Tests-umbrella.h"; sourceTree = "<group>"; };
 		6F384214F0494606ED48069641B8BBBA /* Pods-STRIAPManagerUtils_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		6F4AF94652648F1F559736243A9023B8 /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		6F4AF94652648F1F559736243A9023B8 /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STRIAPManager.m; path = STRIAPManagerUtils/Classes/STRIAPManager.m; sourceTree = "<group>"; };
 		7C035980C9DC16EDFB1D41E5B36AAEDB /* Pods-STRIAPManagerUtils_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-STRIAPManagerUtils_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STRIAPManagerUtils_Tests-dummy.m"; sourceTree = "<group>"; };
-		89CF7EFA594CBB313B46CA823DF83B95 /* NFASQLiteDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NFASQLiteDB-umbrella.h"; sourceTree = "<group>"; };
-		925B4DF76D79BED219CCC03A3365419F /* NFASQLiteDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = NFASQLiteDB.modulemap; sourceTree = "<group>"; };
 		93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		94A3C8D0562C25F5DB6E545666C99718 /* data.db */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = data.db; path = NFASQLiteDB/Assets/data.db; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A08954C2E850D67719C313305419FF1E /* NFASQLiteDB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NFASQLiteDB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1E76B87B66481FC551143416BE3BA7E /* NFASQLiteDB.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NFASQLiteDB.release.xcconfig; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A4378AB99F0CE7FA1EA9A0EAE717C6FC /* STRIAPManagerUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STRIAPManagerUtils.modulemap; sourceTree = "<group>"; };
-		AFF4FF7273676F73F53E2CA27F51DAE8 /* NFASQLiteDB.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NFASQLiteDB.debug.xcconfig; sourceTree = "<group>"; };
 		B009F982C5F3BD12D669947ABC9DB047 /* STRIAPManagerUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-prefix.pch"; sourceTree = "<group>"; };
-		CE87A07579A4523F4333E9393DAB0EFC /* NFASQLiteDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NFASQLiteDB-prefix.pch"; sourceTree = "<group>"; };
 		D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.release.xcconfig; sourceTree = "<group>"; };
 		DB1E25C2F4C4399A5C8DD40AFA423BC6 /* Pods-STRIAPManagerUtils_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-STRIAPManagerUtils_Tests.modulemap"; sourceTree = "<group>"; };
 		E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-umbrella.h"; sourceTree = "<group>"; };
-		ED6F0581753EB574CA2C9996E9CF7861 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		FC1CF8EA62179D5A21843CAFD563211B /* NFASQLiteDB-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "NFASQLiteDB-Info.plist"; sourceTree = "<group>"; };
-		FCD917557D62AA68CB16C9AB7F75147C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		ED6F0581753EB574CA2C9996E9CF7861 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		FCD917557D62AA68CB16C9AB7F75147C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		28AD078822EC0BF2160322097ADD9EA9 /* Frameworks */ = {
+		5748E10C7CCDF1246A45CBD37F4FCC11 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		601280285386353CE566BB7F06FB7601 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4B7BFCBA05809F7F3773771A5799CA7D /* Foundation.framework in Frameworks */,
+				F8154891F6164078EAAA9E95315529EA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,14 +69,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAD5C51EF12376CB6417D79784181552 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A52E0C46B5A41808D8C394D72F60901 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				51776F0A8858D6CA540ECBF966A22D98 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,43 +85,6 @@
 			);
 			name = STRIAPManagerUtils;
 			path = ../..;
-			sourceTree = "<group>";
-		};
-		2353549FAB6F3F29516258C8AA215E99 /* NFASQLiteDB */ = {
-			isa = PBXGroup;
-			children = (
-				63144D227673539E4759FB04FB268978 /* SQLiteDB.swift */,
-				960F8B8DB59FD67B7B5DCC04BC4524F1 /* Resources */,
-				261AF60B53B37A69DF4E65082AFA196A /* Support Files */,
-			);
-			path = NFASQLiteDB;
-			sourceTree = "<group>";
-		};
-		261AF60B53B37A69DF4E65082AFA196A /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				925B4DF76D79BED219CCC03A3365419F /* NFASQLiteDB.modulemap */,
-				4E42F36AA82A7B8F857EB199003C748F /* NFASQLiteDB-dummy.m */,
-				FC1CF8EA62179D5A21843CAFD563211B /* NFASQLiteDB-Info.plist */,
-				CE87A07579A4523F4333E9393DAB0EFC /* NFASQLiteDB-prefix.pch */,
-				89CF7EFA594CBB313B46CA823DF83B95 /* NFASQLiteDB-umbrella.h */,
-				AFF4FF7273676F73F53E2CA27F51DAE8 /* NFASQLiteDB.debug.xcconfig */,
-				A1E76B87B66481FC551143416BE3BA7E /* NFASQLiteDB.release.xcconfig */,
-				0BF1301AACD2A9E5DE51AC737B0E5E56 /* ResourceBundle-NFASQLiteDB-NFASQLiteDB-Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/NFASQLiteDB";
-			sourceTree = "<group>";
-		};
-		2752A8465BF1D38F46E9174B9457441B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A08954C2E850D67719C313305419FF1E /* NFASQLiteDB.bundle */,
-				4F4D8E937846DC7FAED6BCEF860585B9 /* NFASQLiteDB.framework */,
-				5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */,
-				4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		37492FD79F6F6BA246BE839CD678E01A /* Targets Support Files */ = {
@@ -204,12 +120,13 @@
 			name = "Development Pods";
 			sourceTree = "<group>";
 		};
-		960F8B8DB59FD67B7B5DCC04BC4524F1 /* Resources */ = {
+		92157685D36E7E1A2630C821226EC2B8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				94A3C8D0562C25F5DB6E545666C99718 /* data.db */,
+				5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */,
+				4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */,
 			);
-			name = Resources;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		9ADF9067A116028D5813FA8FFE771F5A /* Support Files */ = {
@@ -241,8 +158,7 @@
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				8B4435A0F612CD54B0A58DEF4E4EAE15 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				D5D8438A160D28A786A7180778C12CFD /* Pods */,
-				2752A8465BF1D38F46E9174B9457441B /* Products */,
+				92157685D36E7E1A2630C821226EC2B8 /* Products */,
 				37492FD79F6F6BA246BE839CD678E01A /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -253,14 +169,6 @@
 				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D5D8438A160D28A786A7180778C12CFD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				2353549FAB6F3F29516258C8AA215E99 /* NFASQLiteDB */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		D6FF31AA7E783B9D31ED4ACE0C3A157E /* Pod */ = {
@@ -276,11 +184,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		56E3224D170F7697496D7ED6C33B9B6B /* Headers */ = {
+		7FBAC6A10FF261CA492F3397C1798D75 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				236A0F17EF3788D1FD86E6881A9C8CB9 /* NFASQLiteDB-umbrella.h in Headers */,
+				075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,14 +198,6 @@
 			files = (
 				CA3A73990ED9681F902AFE33162C0860 /* STRIAPManager.h in Headers */,
 				D7A7E4A71CFD0138CA4EE4F2AEEABC85 /* STRIAPManagerUtils-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F4BDAE5B2B3B0800BFBF0BB1B9467CAE /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AD9527915B11436E07511D17F9829113 /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,56 +222,19 @@
 			productReference = 4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		58C1A3B16B27BA894A955F45BC283169 /* NFASQLiteDB-NFASQLiteDB */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 52E66BC7C143F4A13BD116D2D683A598 /* Build configuration list for PBXNativeTarget "NFASQLiteDB-NFASQLiteDB" */;
-			buildPhases = (
-				BDD530409A50C7D7B4F087A8AECFF6D0 /* Sources */,
-				28AD078822EC0BF2160322097ADD9EA9 /* Frameworks */,
-				584E35445D4FD379BFA05DB055515FD7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "NFASQLiteDB-NFASQLiteDB";
-			productName = "NFASQLiteDB-NFASQLiteDB";
-			productReference = A08954C2E850D67719C313305419FF1E /* NFASQLiteDB.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		A72AA0F658BB6424BA2924DBE6CE34E5 /* NFASQLiteDB */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 48FC0805ABE658863D6AE4FD0A0397AB /* Build configuration list for PBXNativeTarget "NFASQLiteDB" */;
-			buildPhases = (
-				56E3224D170F7697496D7ED6C33B9B6B /* Headers */,
-				7B6F88B61E51E5EE513FA2AFBF41B18D /* Sources */,
-				8A52E0C46B5A41808D8C394D72F60901 /* Frameworks */,
-				B878DCC3D3514CAB334C9CB972DE8830 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9676D3EFAA238B6113EDA4BC3A79A1A7 /* PBXTargetDependency */,
-			);
-			name = NFASQLiteDB;
-			productName = NFASQLiteDB;
-			productReference = 4F4D8E937846DC7FAED6BCEF860585B9 /* NFASQLiteDB.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		CCBCEB66CA572998D76ED7BF7217898F /* Pods-STRIAPManagerUtils_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 765FFCD23EF87E1A0AF7C9443712EEDB /* Build configuration list for PBXNativeTarget "Pods-STRIAPManagerUtils_Tests" */;
+			buildConfigurationList = 2582C5960736C7AA17BE41635110DF96 /* Build configuration list for PBXNativeTarget "Pods-STRIAPManagerUtils_Tests" */;
 			buildPhases = (
-				F4BDAE5B2B3B0800BFBF0BB1B9467CAE /* Headers */,
-				3903CDA65E5D7C7D9D9C143AD4B69D56 /* Sources */,
-				601280285386353CE566BB7F06FB7601 /* Frameworks */,
-				D9E7E3FED9E59F2DED788F89CE3C5311 /* Resources */,
+				7FBAC6A10FF261CA492F3397C1798D75 /* Headers */,
+				5F806DA10A165BD9E76BF50B691CDC9E /* Sources */,
+				5748E10C7CCDF1246A45CBD37F4FCC11 /* Frameworks */,
+				4E09E06FCDC1EC7E238AFFA7635B7050 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C3A8649596BC823ECC587F98F1552C85 /* PBXTargetDependency */,
-				E0249B01F1553318A9063A9590F1AFD6 /* PBXTargetDependency */,
+				8EBD178146006C4C0EF416730820470B /* PBXTargetDependency */,
 			);
 			name = "Pods-STRIAPManagerUtils_Tests";
 			productName = "Pods-STRIAPManagerUtils_Tests";
@@ -396,12 +259,10 @@
 				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 2752A8465BF1D38F46E9174B9457441B /* Products */;
+			productRefGroup = 92157685D36E7E1A2630C821226EC2B8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A72AA0F658BB6424BA2924DBE6CE34E5 /* NFASQLiteDB */,
-				58C1A3B16B27BA894A955F45BC283169 /* NFASQLiteDB-NFASQLiteDB */,
 				CCBCEB66CA572998D76ED7BF7217898F /* Pods-STRIAPManagerUtils_Tests */,
 				4026C6DEF0A1BF2E2332DE8277391ADC /* STRIAPManagerUtils */,
 			);
@@ -409,19 +270,10 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		584E35445D4FD379BFA05DB055515FD7 /* Resources */ = {
+		4E09E06FCDC1EC7E238AFFA7635B7050 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5C7D3F03F73A3AFAAA00FC8670712E5 /* data.db in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B878DCC3D3514CAB334C9CB972DE8830 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				751AD9248D151CFE7FF7EA914A721C66 /* NFASQLiteDB.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,24 +284,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9E7E3FED9E59F2DED788F89CE3C5311 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3903CDA65E5D7C7D9D9C143AD4B69D56 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EFC15A165324EF738A2B27A6E3D3FE3B /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C6DF01F431AA07A3F013CCCDBF25A86 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,145 +296,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7B6F88B61E51E5EE513FA2AFBF41B18D /* Sources */ = {
+		5F806DA10A165BD9E76BF50B691CDC9E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D878C7AA69506B31101FC3C84552F3B /* NFASQLiteDB-dummy.m in Sources */,
-				C947CA08BAD374A86DC66E08DA4B02EA /* SQLiteDB.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BDD530409A50C7D7B4F087A8AECFF6D0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				EC55C5AC8CFEBC24DFBA79A16E736A2C /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9676D3EFAA238B6113EDA4BC3A79A1A7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "NFASQLiteDB-NFASQLiteDB";
-			target = 58C1A3B16B27BA894A955F45BC283169 /* NFASQLiteDB-NFASQLiteDB */;
-			targetProxy = D048A876AD88FB25A497D6DA5B26E853 /* PBXContainerItemProxy */;
-		};
-		C3A8649596BC823ECC587F98F1552C85 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = NFASQLiteDB;
-			target = A72AA0F658BB6424BA2924DBE6CE34E5 /* NFASQLiteDB */;
-			targetProxy = C7ACF5209C04AE9DB7D940583B409AC3 /* PBXContainerItemProxy */;
-		};
-		E0249B01F1553318A9063A9590F1AFD6 /* PBXTargetDependency */ = {
+		8EBD178146006C4C0EF416730820470B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = STRIAPManagerUtils;
 			target = 4026C6DEF0A1BF2E2332DE8277391ADC /* STRIAPManagerUtils */;
-			targetProxy = 184E70E1DE511B7AB8B358998ED714E0 /* PBXContainerItemProxy */;
+			targetProxy = 87F27F4FA95DF4120FAFBA9DE9DD16F4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0EBAA69A2720E7284B4A766E33F0AE49 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFF4FF7273676F73F53E2CA27F51DAE8 /* NFASQLiteDB.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/NFASQLiteDB";
-				IBSC_MODULE = NFASQLiteDB;
-				INFOPLIST_FILE = "Target Support Files/NFASQLiteDB/ResourceBundle-NFASQLiteDB-NFASQLiteDB-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = NFASQLiteDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		11FF3C57113D2D97486F6E610164EFDE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1E76B87B66481FC551143416BE3BA7E /* NFASQLiteDB.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NFASQLiteDB/NFASQLiteDB-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NFASQLiteDB/NFASQLiteDB-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NFASQLiteDB/NFASQLiteDB.modulemap";
-				PRODUCT_MODULE_NAME = NFASQLiteDB;
-				PRODUCT_NAME = NFASQLiteDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1DD7F9C8CAD466A56659D5471339649E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1E76B87B66481FC551143416BE3BA7E /* NFASQLiteDB.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/NFASQLiteDB";
-				IBSC_MODULE = NFASQLiteDB;
-				INFOPLIST_FILE = "Target Support Files/NFASQLiteDB/ResourceBundle-NFASQLiteDB-NFASQLiteDB-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = NFASQLiteDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		2E77D100BBE23B44DD3D3BB6D49E0575 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils.modulemap";
-				PRODUCT_MODULE_NAME = STRIAPManagerUtils;
-				PRODUCT_NAME = STRIAPManagerUtils;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		5583CFF7CA0F0C8C7C7331B229ACB798 /* Release */ = {
+		0D383B035353F7BED42DEC46C347ADE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */;
 			buildSettings = {
@@ -631,38 +350,7 @@
 			};
 			name = Release;
 		};
-		6E37DD5C907F5466360E8BC1F112B707 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AFF4FF7273676F73F53E2CA27F51DAE8 /* NFASQLiteDB.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/NFASQLiteDB/NFASQLiteDB-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/NFASQLiteDB/NFASQLiteDB-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/NFASQLiteDB/NFASQLiteDB.modulemap";
-				PRODUCT_MODULE_NAME = NFASQLiteDB;
-				PRODUCT_NAME = NFASQLiteDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8E1633226467F7111D406A153FE3465D /* Debug */ = {
+		1CFE011AF270547828D0E70E8A88F453 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2FFF3FF2DEF08FAE855AD03684984773 /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */;
 			buildSettings = {
@@ -694,6 +382,38 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		2E77D100BBE23B44DD3D3BB6D49E0575 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/STRIAPManagerUtils/STRIAPManagerUtils.modulemap";
+				PRODUCT_MODULE_NAME = STRIAPManagerUtils;
+				PRODUCT_NAME = STRIAPManagerUtils;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		AC3B34B53CF5F1DCB9C7262402ECF2DC /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -779,7 +499,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -852,38 +573,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2582C5960736C7AA17BE41635110DF96 /* Build configuration list for PBXNativeTarget "Pods-STRIAPManagerUtils_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1CFE011AF270547828D0E70E8A88F453 /* Debug */,
+				0D383B035353F7BED42DEC46C347ADE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8BCBD0110C2658BB5DAADB9B7D97B92 /* Debug */,
 				B0087CB4594321EF41619F3181FE120E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		48FC0805ABE658863D6AE4FD0A0397AB /* Build configuration list for PBXNativeTarget "NFASQLiteDB" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E37DD5C907F5466360E8BC1F112B707 /* Debug */,
-				11FF3C57113D2D97486F6E610164EFDE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		52E66BC7C143F4A13BD116D2D683A598 /* Build configuration list for PBXNativeTarget "NFASQLiteDB-NFASQLiteDB" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0EBAA69A2720E7284B4A766E33F0AE49 /* Debug */,
-				1DD7F9C8CAD466A56659D5471339649E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		765FFCD23EF87E1A0AF7C9443712EEDB /* Build configuration list for PBXNativeTarget "Pods-STRIAPManagerUtils_Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8E1633226467F7111D406A153FE3465D /* Debug */,
-				5583CFF7CA0F0C8C7C7331B229ACB798 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

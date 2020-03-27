@@ -216,12 +216,10 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-STRIAPManagerUtils_Tests/Pods-STRIAPManagerUtils_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/NFASQLiteDB/NFASQLiteDB.framework",
 				"${BUILT_PRODUCTS_DIR}/STRIAPManagerUtils/STRIAPManagerUtils.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NFASQLiteDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STRIAPManagerUtils.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

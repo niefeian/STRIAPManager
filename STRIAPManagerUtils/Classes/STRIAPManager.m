@@ -27,7 +27,6 @@
     IAPSubscribeHandle _subhandle;
     NSInteger index;
     NSMutableArray *_finishKeys;
-//    NSMutableDictionary *_map;
     NSTimer *timer;
     NSString *_para;
 }

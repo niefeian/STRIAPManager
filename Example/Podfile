@@ -2,6 +2,5 @@ use_frameworks!
 
 target 'STRIAPManagerUtils_Tests' do
   pod 'STRIAPManagerUtils', :path => '../'
-  pod 'NFASQLiteDB'
  
 end
