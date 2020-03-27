@@ -25,6 +25,7 @@
     NSString           *_purchID;
     IAPCompletionHandle _handle;
     IAPSubscribeHandle _subhandle;
+    IAPLogHandle _log;
     NSInteger index;
     NSMutableArray *_finishKeys;
     NSTimer *timer;
@@ -270,6 +271,7 @@
     #if DEBUG
                    NSLog(@"校验成功%ld",(long)index);
                    NSLog(@"----验证结果 %@",jsonResponse);
+                 
     #endif
                }
            }];
@@ -303,6 +305,7 @@
     
     #if DEBUG
     NSLog(@"%@", tips);
+    [self blockLogTransactionIdentifier:key desc:tips info:@""];
     #endif
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:tips];
     if(_handle){
@@ -312,6 +315,9 @@
         }
         if (!dic){
             //参数完全丢失
+            #if DEBUG
+            [self blockLogTransactionIdentifier:key desc:@"交易参数完全丢失无法进行下一步 " info:@""];
+            #endif
             return;
         }
         id p = [dic objectForKey:@"para"];
@@ -379,10 +385,16 @@
     
     if(!receipt){
         // 交易凭证为空验证失败  是否要完结订单？ 存在付了钱但是订单没回来的情况
+        #if DEBUG
+         [self blockLogTransactionIdentifier:@"" desc:@"交易凭证为空 " info:@""];
+        #endif
         [self handleActionWithType:SIAPPurchVerFailed data:nil key:@"" para:@""];
         return;
     }
     if (!transaction.payment.applicationUsername){
+        #if DEBUG
+            [self blockLogTransactionIdentifier:transaction.transactionIdentifier desc:@"交易参数为空 " info:@""];
+        #endif
          [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }else{
         [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
@@ -398,6 +410,7 @@
     if([product count] <= 0){
 #if DEBUG
         NSLog(@"--------------没有商品------------------");
+        [self blockLogTransactionIdentifier:@"" desc:@"没有商品 " info:@""];
 #endif
         return;
     }
@@ -419,15 +432,19 @@
     NSLog(@"%@",[p price]);
     NSLog(@"%@",[p productIdentifier]);
     NSLog(@"发送购买请求");
+
+    [self blockLogTransactionIdentifier:@"" desc:@"订单生成 发送购买请求 " info:@""];
 #endif
 
     SKMutablePayment *payment = [SKMutablePayment paymentWithProduct:p];
     payment.applicationUsername = _para;
     
     [[SKPaymentQueue defaultQueue] addPayment:payment];
+   
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
+      [self blockLogTransactionIdentifier:@"" desc:@"用户取消操作" info:@""];
       [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消操作"];
 }
 //请求失败
@@ -438,37 +455,52 @@
 }
 
 - (void)requestDidFinish:(SKRequest *)request{
-#if DEBUG
-    NSLog(@"------------反馈信息结束-----------------");
-#endif
+    #if DEBUG
+     [self blockLogTransactionIdentifier:@"" desc:@"反馈信息结束" info:@""];
+    #endif
 }
 
 #pragma mark - SKPaymentTransactionObserver
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
     #if DEBUG
-             NSLog(@"--------------updatedTransactions------------------");
+            NSLog(@"--------------updatedTransactions------------------");
+    [self blockLogTransactionIdentifier:@"" desc:[NSString stringWithFormat:@"商品出现更新,总数量%lu",(unsigned long)transactions.count] info:@""];
     #endif
+   
     for (SKPaymentTransaction *tran in transactions) {
         switch (tran.transactionState) {
             case SKPaymentTransactionStatePurchased:
                 [self verifyPurchaseWithPaymentTransaction:tran];
+                #if DEBUG
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买完成即将提交服务端校验" info:@""];
+                #endif
                 break;
             case SKPaymentTransactionStatePurchasing:
-#if DEBUG
+               
+            #if DEBUG
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品添加进列表" info:@""];
                 NSLog(@"商品添加进列表");
-#endif
+                #endif
                 break;
             case SKPaymentTransactionStateRestored:
-#if DEBUG
+                #if DEBUG
                 NSLog(@"已经购买过商品");
-#endif
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"已经购买过商品" info:@""];
+                #endif
+                
                 // 消耗型不支持恢复购买
                 [[SKPaymentQueue defaultQueue] finishTransaction:tran];
                 break;
             case SKPaymentTransactionStateFailed:
+                #if DEBUG
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买失败" info:@""];
+                #endif
                 [self failedTransaction:tran];
                 break;
             default:
+                #if DEBUG
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品出现未知状态" info:@""];
+                #endif
                 [[SKPaymentQueue defaultQueue] finishTransaction:tran];
                 break;
         }
@@ -512,5 +544,14 @@
     return dic;
 }
 
+- (void)binLog:(IAPLogHandle)log{
+    _log = log;
+}
+
+-(void)blockLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  info:(NSString *)info {
+    if (_log){
+        _log(transactionIdentifier,desc,info);
+    }
+}
 
 @end

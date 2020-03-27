@@ -25,6 +25,9 @@ typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
 
+typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,,NSString * info);
+
+
 @interface STRIAPManager : NSObject
 
 /*
@@ -75,6 +78,9 @@ typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 - (void)testTransactionData:(NSData *)receipt index:(NSInteger)index;
 
 
+
+#pragma mark -  订单校验 添加log 回调 更新支付状态
+- (void)binLog:(IAPLogHandle)log;
 @end
 
 NS_ASSUME_NONNULL_END
