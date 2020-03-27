@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'STRIAPManagerUtils'
-  s.version          = '0.0.11'
+  s.version          = '0.0.12'
   s.summary          = '内购封装'
 
 # This description is used to generate tags and improve search results.

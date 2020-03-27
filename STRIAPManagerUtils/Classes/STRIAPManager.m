@@ -27,6 +27,7 @@
     IAPSubscribeHandle _subhandle;
     IAPLogHandle _log;
     NSInteger index;
+    NSMutableArray *_lodingKey;
     NSMutableArray *_finishKeys;
     NSTimer *timer;
     NSString *_para;
@@ -50,6 +51,7 @@
     if (self) {
 //        _map = [[NSMutableDictionary alloc] init];
         _finishKeys = [[NSMutableArray alloc] init];
+        _lodingKey = [[NSMutableArray alloc] init];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
         index = 0;
@@ -124,32 +126,20 @@
     }
 }
 
-// 应用网络切换
--(void)applicationWillResignActive{
-    
-}
 
 -(void)reloadTransactionObserver{
         /*重设KVO的方式依旧会存在页面卡死在Loding页的情况*/
 //     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 //     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    
-    //将数据存在 _map ,支付完成的数据都会在这边 ，然后通过 key - value 进行完结指定的订单
-//    if (_map != nil && _map.allValues.count > 0) {
-//        NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
-//        NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
-//        for (SKPaymentTransaction * transaction in _map.allValues) {
-//            [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
-//        }
-//    }
-    
+
         NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
-       if (transactions.count > 0) {
+       if (transactions.count > 0 && _lodingKey.count > 0) {
             NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
             NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
            for (SKPaymentTransaction* transaction in transactions){
-               if (transaction.transactionState == SKPaymentTransactionStatePurchased) {
+               if (transaction.transactionState == SKPaymentTransactionStatePurchased && [_lodingKey containsObject:transaction.transactionIdentifier]) {
                     [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+                   return;
                }
            }
        }
@@ -397,6 +387,10 @@
         #endif
          [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     }else{
+        if (![_lodingKey containsObject:transaction.transactionIdentifier]){
+             [_lodingKey addObject:transaction.transactionIdentifier];
+        }
+       
         [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
     }
     // 购买成功将交易凭证发送给服务端进行再次校验
@@ -449,9 +443,12 @@
 }
 //请求失败
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
-#if DEBUG
-    NSLog(@"------------------错误-----------------:%@", error);
-#endif
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"当前网络不给力,请稍后再试~"];
+   #if DEBUG
+        NSLog(@"------------------错误-----------------:%@", error);
+       [self blockLogTransactionIdentifier:@"" desc:@"唤醒内购失败 " info:error.localizedDescription];
+   #endif
+    
 }
 
 - (void)requestDidFinish:(SKRequest *)request{
@@ -466,7 +463,6 @@
             NSLog(@"--------------updatedTransactions------------------");
     [self blockLogTransactionIdentifier:@"" desc:[NSString stringWithFormat:@"商品出现更新,总数量%lu",(unsigned long)transactions.count] info:@""];
     #endif
-   
     for (SKPaymentTransaction *tran in transactions) {
         switch (tran.transactionState) {
             case SKPaymentTransactionStatePurchased:
