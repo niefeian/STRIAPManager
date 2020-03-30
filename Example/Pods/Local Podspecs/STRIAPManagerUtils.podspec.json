@@ -1,6 +1,6 @@
 {
   "name": "STRIAPManagerUtils",
-  "version": "0.0.7",
+  "version": "0.0.15",
   "summary": "内购封装",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/niefeian/STRIAPManager",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/niefeian/STRIAPManager.git",
-    "tag": "0.0.7"
+    "tag": "0.0.15"
   },
   "platforms": {
     "ios": "8.0"

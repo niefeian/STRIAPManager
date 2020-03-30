@@ -20,6 +20,7 @@
 
 #import "STRIAPManager.h"
 #import <StoreKit/StoreKit.h>
+#import "Reachability/Reachability.h"
 
 NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver";
 
@@ -32,8 +33,10 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     NSInteger index;
     NSMutableArray *_lodingKey;
     NSMutableArray *_finishKeys;
+    NSMutableArray *_errorFinishKey;//订单未完成需要完结的订单
     NSTimer *timer;
     NSString *_para;
+    Reachability *reachability;
 }
 @end
 @implementation STRIAPManager
@@ -55,6 +58,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 //        _map = [[NSMutableDictionary alloc] init];
         _finishKeys = [[NSMutableArray alloc] init];
         _lodingKey = [[NSMutableArray alloc] init];
+        _errorFinishKey = [[NSMutableArray alloc] init];
+        reachability = [Reachability reachabilityForInternetConnection];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
         index = 0;
@@ -76,7 +81,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             for (SKPaymentTransaction* transaction in transactions){
                   if ([array containsObject:transaction.transactionIdentifier]) {
                       [_finishKeys addObject:transaction.transactionIdentifier];
-                      [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                      [self finishTransaction:transaction];
                   }
             }
         }else{
@@ -96,6 +101,17 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         if ([SKPaymentQueue canMakePayments]) {
             // 开始购买服务
             _purchID = purchID;
+            
+            NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+            if (transactions.count > 0) {
+                for (SKPaymentTransaction* transaction in transactions){
+                     if (transaction.transactionState == SKPaymentTransactionStatePurchased && transaction.payment.productIdentifier == purchID) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
+                         [self verifyPurchaseWithPaymentTransaction:transaction];
+                         return;
+                     }
+                }
+            }
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             [dic setValue:para forKey:@"para"];
             [dic setValue:purchID forKey:@"purchID"];
@@ -125,12 +141,22 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         if (transactions.count > 0) {
         for (SKPaymentTransaction* transaction in transactions){
               if (transaction.transactionIdentifier == transactionIdentifier) {
-                  [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                  [self finishTransaction:transaction];
             }
         }
     }
 }
 
+//_errorFinishKey
+- (void)finishTransaction:(SKPaymentTransaction *)transaction{
+    //这边要检查一下网络情况，如果断网，就先不finishTransaction ,否则会导致，本地订单finishTransaction了，服务器的却没有
+    if ([reachability isReachable]){
+         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    }else{
+        
+    }
+   
+}
 
 -(void)reloadTransactionObserver{
         /*重设KVO的方式依旧会存在页面卡死在Loding页的情况*/
@@ -154,7 +180,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
        for (SKPaymentTransaction* transaction in transactions){
            if (transaction.transactionState == SKPaymentTransactionStatePurchased && [_lodingKey containsObject:transaction.transactionIdentifier]) {
                 [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
-               return;
+
            }
        }
    }
@@ -167,7 +193,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if (transactions.count > 0) {
         for (SKPaymentTransaction* transaction in transactions){
             if (transaction.transactionState == SKPaymentTransactionStatePurchased) {
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                  [self finishTransaction:transaction];
             }
         }
     }
@@ -329,6 +355,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         NSString *purchID = [dic objectForKey:@"purchID"];
         NSString *tmpid = [dic objectForKey:@"tmpid"];
         id info = [dic objectForKey:@"info"];
+        if (!info) {
+            info = @"";
+        }
         if (!tmpid) {
             tmpid = @"";
         }
@@ -369,8 +398,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }else{
         [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@""];
     }
-    
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+      [self finishTransaction:transaction];
 }
 
 - (NSData *)verifyPurchase{
@@ -401,7 +429,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         #if DEBUG
             [self blockLogTransactionIdentifier:transaction.transactionIdentifier desc:@"交易参数为空 " info:@""];
         #endif
-         [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+          [self finishTransaction:transaction];
     }else{
         if (![_lodingKey containsObject:transaction.transactionIdentifier]){
              [_lodingKey addObject:transaction.transactionIdentifier];
@@ -478,7 +506,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 #pragma mark - SKPaymentTransactionObserver
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
     #if DEBUG
-            NSLog(@"--------------updatedTransactions------------------");
+    NSLog(@"--------------updatedTransactions------------------");
     [self blockLogTransactionIdentifier:@"" desc:[NSString stringWithFormat:@"商品出现更新,总数量%lu",(unsigned long)transactions.count] info:@""];
     #endif
     for (SKPaymentTransaction *tran in transactions) {
@@ -490,7 +518,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 #endif
                 break;
             case SKPaymentTransactionStatePurchasing:
-               
             #if DEBUG
                 [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品添加进列表" info:@""];
                 NSLog(@"商品添加进列表");
@@ -501,9 +528,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 NSLog(@"已经购买过商品");
                 [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"已经购买过商品" info:@""];
                 #endif
-                
                 // 消耗型不支持恢复购买
-                [[SKPaymentQueue defaultQueue] finishTransaction:tran];
+                [self finishTransaction:tran];
                 break;
             case SKPaymentTransactionStateFailed:
                 #if DEBUG
@@ -515,7 +541,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 #if DEBUG
                 [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品出现未知状态" info:tran.error.localizedDescription];
                 #endif
-                [[SKPaymentQueue defaultQueue] finishTransaction:tran];
+//                [[SKPaymentQueue defaultQueue] finishTransaction:tran];
                 break;
         }
     }

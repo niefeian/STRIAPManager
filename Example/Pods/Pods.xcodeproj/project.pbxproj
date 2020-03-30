@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00520A933891A64D3D67FA5DBEF5B8E4 /* STRIAPManagerUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D956C48B786941005422956F3AB36E5 /* STRIAPManagerUtils-dummy.m */; };
 		075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9FE39E79E2BFD74199F6EEEA944A319E /* STRIAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */; };
-		A60E63EF242DC0D8004547F6 /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CA3A73990ED9681F902AFE33162C0860 /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD5C51EF12376CB6417D79784181552 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
-		D7A7E4A71CFD0138CA4EE4F2AEEABC85 /* STRIAPManagerUtils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		402B4AEC94FF6A3B05CE854CCBA5B905 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CDEB3F11E76CBAAAE2DE5837120AB9E /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5B62BE2DBDCB0394E565469A2ECD08C1 /* STRIAPManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A5D9D61B6D1F7419FAC1963D1086989 /* STRIAPManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8987E61265FF80E711FCC0216B91FBE6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B0E6BC3DFA0ABB8E91CED46EF66A328 /* Reachability.m */; };
+		948DC698144728ACCA6683E0BAB48203 /* STRIAPManagerUtils-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FCEBBEA64B308A2205BC336487331EE /* STRIAPManagerUtils-dummy.m */; };
+		A6CF92C12431DB990032C378 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CF92BF2431DB990032C378 /* Reachability.m */; };
+		A6CF92C22431DB990032C378 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = A6CF92C02431DB990032C378 /* Reachability.h */; };
+		AFEB40D5C4894D662AA97E836F9BECC1 /* STRIAPManagerUtils-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 16DA432975809A3D9A3D2EEE63625F8E /* STRIAPManagerUtils-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EBBC06D0C2498AEF3BBC174F8B82DB9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 		EC55C5AC8CFEBC24DFBA79A16E736A2C /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */; };
+		EF49869B33085A245F4C694C54B28EC7 /* STRIAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A98255C812E90FAC333C3953B4583FC6 /* STRIAPManager.m */; };
 		F8154891F6164078EAAA9E95315529EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,34 +32,46 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		030ECD964435D425449559D0F28FD4B3 /* STRIAPManagerUtils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.debug.xcconfig; sourceTree = "<group>"; };
-		0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STRIAPManager.h; path = STRIAPManagerUtils/Classes/STRIAPManager.h; sourceTree = "<group>"; };
+		040107B7F55872609281C2FE110847F3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0C3F21D9937AED8CAD807EEEDC4F4E47 /* Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2D956C48B786941005422956F3AB36E5 /* STRIAPManagerUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "STRIAPManagerUtils-dummy.m"; sourceTree = "<group>"; };
+		1045E18E2B2109319957B09FABD2AC30 /* STRIAPManagerUtils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.release.xcconfig; sourceTree = "<group>"; };
+		16DA432975809A3D9A3D2EEE63625F8E /* STRIAPManagerUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-umbrella.h"; sourceTree = "<group>"; };
 		2FFF3FF2DEF08FAE855AD03684984773 /* Pods-STRIAPManagerUtils_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		312A0C05E8AEEA1EAC83562C6F7391D7 /* Pods-STRIAPManagerUtils_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-Info.plist"; sourceTree = "<group>"; };
 		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		3F8B9F4CDFF8F4654E3B6F28AA818A3D /* STRIAPManagerUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STRIAPManagerUtils-Info.plist"; sourceTree = "<group>"; };
+		3B0E6BC3DFA0ABB8E91CED46EF66A328 /* Reachability.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		3CDEB3F11E76CBAAAE2DE5837120AB9E /* Reachability.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		3E2D26F6DE3F6C35AC1E92A552F70EC6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		40F32CE90D4B5156068D18136F25D72E /* STRIAPManagerUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-prefix.pch"; sourceTree = "<group>"; };
 		4840EA96D60D95A3E594BA0A94A8F624 /* STRIAPManagerUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STRIAPManagerUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A5D9D61B6D1F7419FAC1963D1086989 /* STRIAPManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STRIAPManager.h; path = STRIAPManagerUtils/Classes/STRIAPManager.h; sourceTree = "<group>"; };
+		50CECB10FC7FA20D7379E33A1E218707 /* STRIAPManagerUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STRIAPManagerUtils.modulemap; sourceTree = "<group>"; };
 		5F586E49BE81D26B9B211E4366F1934A /* Pods_STRIAPManagerUtils_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STRIAPManagerUtils_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9C2B41C1EEBBDC9E94BAC4C55012F8 /* Pods-STRIAPManagerUtils_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STRIAPManagerUtils_Tests-umbrella.h"; sourceTree = "<group>"; };
 		6F384214F0494606ED48069641B8BBBA /* Pods-STRIAPManagerUtils_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-STRIAPManagerUtils_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		6F4AF94652648F1F559736243A9023B8 /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STRIAPManager.m; path = STRIAPManagerUtils/Classes/STRIAPManager.m; sourceTree = "<group>"; };
+		6FCEBBEA64B308A2205BC336487331EE /* STRIAPManagerUtils-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "STRIAPManagerUtils-dummy.m"; sourceTree = "<group>"; };
+		742E74B58449DDC9D93B9A1337AFDC38 /* STRIAPManagerUtils.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.debug.xcconfig; sourceTree = "<group>"; };
 		7C035980C9DC16EDFB1D41E5B36AAEDB /* Pods-STRIAPManagerUtils_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-STRIAPManagerUtils_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		829E41F85CB658B2DD464731BE2A5CAB /* Pods-STRIAPManagerUtils_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STRIAPManagerUtils_Tests-dummy.m"; sourceTree = "<group>"; };
+		870AE9DCA04BAC1B2DA771A238BB63DA /* STRIAPManagerUtils.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = STRIAPManagerUtils.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93DFDBD29EDA8DDDCE16A93B86EEE871 /* Pods-STRIAPManagerUtils_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STRIAPManagerUtils_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A4378AB99F0CE7FA1EA9A0EAE717C6FC /* STRIAPManagerUtils.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = STRIAPManagerUtils.modulemap; sourceTree = "<group>"; };
-		B009F982C5F3BD12D669947ABC9DB047 /* STRIAPManagerUtils-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-prefix.pch"; sourceTree = "<group>"; };
-		D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = STRIAPManagerUtils.release.xcconfig; sourceTree = "<group>"; };
+		A6CF92BF2431DB990032C378 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A6CF92C02431DB990032C378 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A95D84C3D7EF1D3B49432E5C59591252 /* STRIAPManagerUtils-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "STRIAPManagerUtils-Info.plist"; sourceTree = "<group>"; };
+		A98255C812E90FAC333C3953B4583FC6 /* STRIAPManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STRIAPManager.m; path = STRIAPManagerUtils/Classes/STRIAPManager.m; sourceTree = "<group>"; };
 		DB1E25C2F4C4399A5C8DD40AFA423BC6 /* Pods-STRIAPManagerUtils_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-STRIAPManagerUtils_Tests.modulemap"; sourceTree = "<group>"; };
-		E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "STRIAPManagerUtils-umbrella.h"; sourceTree = "<group>"; };
-		ED6F0581753EB574CA2C9996E9CF7861 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		FCD917557D62AA68CB16C9AB7F75147C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5527A1058EAB0F29AB8BB01F65839580 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBBC06D0C2498AEF3BBC174F8B82DB9D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5748E10C7CCDF1246A45CBD37F4FCC11 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,27 +80,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		78BF411D92ACB0D8C9AC339AFB637A52 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CAD5C51EF12376CB6417D79784181552 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		033D1C357788D7BB715664C8485E65A2 /* STRIAPManagerUtils */ = {
+		177E1B5BC2E2A8213757C2A32BB7E88A /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				0BE45CB7848C8653BF43EDFF481950E4 /* STRIAPManager.h */,
-				6F7F7F676401CE19A6CF8ECAE1542DD0 /* STRIAPManager.m */,
-				D6FF31AA7E783B9D31ED4ACE0C3A157E /* Pod */,
-				9ADF9067A116028D5813FA8FFE771F5A /* Support Files */,
+				50CECB10FC7FA20D7379E33A1E218707 /* STRIAPManagerUtils.modulemap */,
+				6FCEBBEA64B308A2205BC336487331EE /* STRIAPManagerUtils-dummy.m */,
+				A95D84C3D7EF1D3B49432E5C59591252 /* STRIAPManagerUtils-Info.plist */,
+				40F32CE90D4B5156068D18136F25D72E /* STRIAPManagerUtils-prefix.pch */,
+				16DA432975809A3D9A3D2EEE63625F8E /* STRIAPManagerUtils-umbrella.h */,
+				742E74B58449DDC9D93B9A1337AFDC38 /* STRIAPManagerUtils.debug.xcconfig */,
+				1045E18E2B2109319957B09FABD2AC30 /* STRIAPManagerUtils.release.xcconfig */,
 			);
-			name = STRIAPManagerUtils;
-			path = ../..;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/STRIAPManagerUtils";
+			sourceTree = "<group>";
+		};
+		1D71EB20B8200EE445CCB23ACCF924D2 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				3CDEB3F11E76CBAAAE2DE5837120AB9E /* Reachability.h */,
+				3B0E6BC3DFA0ABB8E91CED46EF66A328 /* Reachability.m */,
+			);
+			name = Reachability;
+			path = STRIAPManagerUtils/Classes/Reachability;
 			sourceTree = "<group>";
 		};
 		37492FD79F6F6BA246BE839CD678E01A /* Targets Support Files */ = {
@@ -94,6 +114,16 @@
 				6082CC1D3BE1D1612F729D74A4D8AF8D /* Pods-STRIAPManagerUtils_Tests */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		4057A7821FA6BA8AB475248FB44F9AAD /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				3E2D26F6DE3F6C35AC1E92A552F70EC6 /* LICENSE */,
+				040107B7F55872609281C2FE110847F3 /* README.md */,
+				870AE9DCA04BAC1B2DA771A238BB63DA /* STRIAPManagerUtils.podspec */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		6082CC1D3BE1D1612F729D74A4D8AF8D /* Pods-STRIAPManagerUtils_Tests */ = {
@@ -113,10 +143,24 @@
 			path = "Target Support Files/Pods-STRIAPManagerUtils_Tests";
 			sourceTree = "<group>";
 		};
-		8B4435A0F612CD54B0A58DEF4E4EAE15 /* Development Pods */ = {
+		6E3665AB3769480751F1474C76855F67 /* STRIAPManagerUtils */ = {
 			isa = PBXGroup;
 			children = (
-				033D1C357788D7BB715664C8485E65A2 /* STRIAPManagerUtils */,
+				4A5D9D61B6D1F7419FAC1963D1086989 /* STRIAPManager.h */,
+				A98255C812E90FAC333C3953B4583FC6 /* STRIAPManager.m */,
+				4057A7821FA6BA8AB475248FB44F9AAD /* Pod */,
+				1D71EB20B8200EE445CCB23ACCF924D2 /* Reachability */,
+				177E1B5BC2E2A8213757C2A32BB7E88A /* Support Files */,
+			);
+			name = STRIAPManagerUtils;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		7CB2C19403520DBE3854311A3B150E68 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A6CF92BE2431DB990032C378 /* Reachability */,
+				6E3665AB3769480751F1474C76855F67 /* STRIAPManagerUtils */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -130,19 +174,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9ADF9067A116028D5813FA8FFE771F5A /* Support Files */ = {
+		A6CF92BE2431DB990032C378 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				A4378AB99F0CE7FA1EA9A0EAE717C6FC /* STRIAPManagerUtils.modulemap */,
-				2D956C48B786941005422956F3AB36E5 /* STRIAPManagerUtils-dummy.m */,
-				3F8B9F4CDFF8F4654E3B6F28AA818A3D /* STRIAPManagerUtils-Info.plist */,
-				B009F982C5F3BD12D669947ABC9DB047 /* STRIAPManagerUtils-prefix.pch */,
-				E044B872417DB767C7055E23185DBCC4 /* STRIAPManagerUtils-umbrella.h */,
-				030ECD964435D425449559D0F28FD4B3 /* STRIAPManagerUtils.debug.xcconfig */,
-				D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */,
+				A6CF92BF2431DB990032C378 /* Reachability.m */,
+				A6CF92C02431DB990032C378 /* Reachability.h */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/STRIAPManagerUtils";
+			name = Reachability;
+			path = ../../STRIAPManagerUtils/Classes/Reachability;
 			sourceTree = "<group>";
 		};
 		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
@@ -157,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				8B4435A0F612CD54B0A58DEF4E4EAE15 /* Development Pods */,
+				7CB2C19403520DBE3854311A3B150E68 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
 				92157685D36E7E1A2630C821226EC2B8 /* Products */,
 				37492FD79F6F6BA246BE839CD678E01A /* Targets Support Files */,
@@ -172,16 +211,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D6FF31AA7E783B9D31ED4ACE0C3A157E /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				ED6F0581753EB574CA2C9996E9CF7861 /* LICENSE */,
-				FCD917557D62AA68CB16C9AB7F75147C /* README.md */,
-				6F4AF94652648F1F559736243A9023B8 /* STRIAPManagerUtils.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -190,16 +219,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				075E7F65F38DBEC2008886DF1D4EC45E /* Pods-STRIAPManagerUtils_Tests-umbrella.h in Headers */,
-				A60E63EF242DC0D8004547F6 /* STRIAPManager.h in Headers */,
+				A6CF92C22431DB990032C378 /* Reachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A0AAE89E964F2314B42BE6A5FFC488EC /* Headers */ = {
+		FF1070EB807C386079155A3D1F52C09F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA3A73990ED9681F902AFE33162C0860 /* STRIAPManager.h in Headers */,
-				D7A7E4A71CFD0138CA4EE4F2AEEABC85 /* STRIAPManagerUtils-umbrella.h in Headers */,
+				402B4AEC94FF6A3B05CE854CCBA5B905 /* Reachability.h in Headers */,
+				5B62BE2DBDCB0394E565469A2ECD08C1 /* STRIAPManager.h in Headers */,
+				AFEB40D5C4894D662AA97E836F9BECC1 /* STRIAPManagerUtils-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,12 +238,12 @@
 /* Begin PBXNativeTarget section */
 		4026C6DEF0A1BF2E2332DE8277391ADC /* STRIAPManagerUtils */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7E59507DC446CEBDF775BAE36CD6490B /* Build configuration list for PBXNativeTarget "STRIAPManagerUtils" */;
+			buildConfigurationList = 76C0D107AD113C55F8D1A0678C935C9E /* Build configuration list for PBXNativeTarget "STRIAPManagerUtils" */;
 			buildPhases = (
-				A0AAE89E964F2314B42BE6A5FFC488EC /* Headers */,
-				3C6DF01F431AA07A3F013CCCDBF25A86 /* Sources */,
-				78BF411D92ACB0D8C9AC339AFB637A52 /* Frameworks */,
-				CEACE2E777EF1B332E971561F730157D /* Resources */,
+				FF1070EB807C386079155A3D1F52C09F /* Headers */,
+				26939BFE2BF3C32350AD02202649138C /* Sources */,
+				5527A1058EAB0F29AB8BB01F65839580 /* Frameworks */,
+				38667C3A2E247ED21FE9DD62FBF1D1CE /* Resources */,
 			);
 			buildRules = (
 			);
@@ -272,14 +302,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4E09E06FCDC1EC7E238AFFA7635B7050 /* Resources */ = {
+		38667C3A2E247ED21FE9DD62FBF1D1CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEACE2E777EF1B332E971561F730157D /* Resources */ = {
+		4E09E06FCDC1EC7E238AFFA7635B7050 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -289,12 +319,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3C6DF01F431AA07A3F013CCCDBF25A86 /* Sources */ = {
+		26939BFE2BF3C32350AD02202649138C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FE39E79E2BFD74199F6EEEA944A319E /* STRIAPManager.m in Sources */,
-				00520A933891A64D3D67FA5DBEF5B8E4 /* STRIAPManagerUtils-dummy.m in Sources */,
+				8987E61265FF80E711FCC0216B91FBE6 /* Reachability.m in Sources */,
+				EF49869B33085A245F4C694C54B28EC7 /* STRIAPManager.m in Sources */,
+				948DC698144728ACCA6683E0BAB48203 /* STRIAPManagerUtils-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6CF92C12431DB990032C378 /* Reachability.m in Sources */,
 				EC55C5AC8CFEBC24DFBA79A16E736A2C /* Pods-STRIAPManagerUtils_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,9 +417,9 @@
 			};
 			name = Debug;
 		};
-		2E77D100BBE23B44DD3D3BB6D49E0575 /* Release */ = {
+		407CF7D84551C63793DAF58908F73A68 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D1FDBF0CD7914CDCE0C5341A96A1229F /* STRIAPManagerUtils.release.xcconfig */;
+			baseConfigurationReference = 1045E18E2B2109319957B09FABD2AC30 /* STRIAPManagerUtils.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -417,9 +449,9 @@
 			};
 			name = Release;
 		};
-		AC3B34B53CF5F1DCB9C7262402ECF2DC /* Debug */ = {
+		41B55C3FDC6838C3BEC1CE34525A6C3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 030ECD964435D425449559D0F28FD4B3 /* STRIAPManagerUtils.debug.xcconfig */;
+			baseConfigurationReference = 742E74B58449DDC9D93B9A1337AFDC38 /* STRIAPManagerUtils.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -592,11 +624,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7E59507DC446CEBDF775BAE36CD6490B /* Build configuration list for PBXNativeTarget "STRIAPManagerUtils" */ = {
+		76C0D107AD113C55F8D1A0678C935C9E /* Build configuration list for PBXNativeTarget "STRIAPManagerUtils" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AC3B34B53CF5F1DCB9C7262402ECF2DC /* Debug */,
-				2E77D100BBE23B44DD3D3BB6D49E0575 /* Release */,
+				41B55C3FDC6838C3BEC1CE34525A6C3F /* Debug */,
+				407CF7D84551C63793DAF58908F73A68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

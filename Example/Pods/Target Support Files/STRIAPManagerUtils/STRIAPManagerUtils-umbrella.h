@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "Reachability.h"
 #import "STRIAPManager.h"
 
 FOUNDATION_EXPORT double STRIAPManagerUtilsVersionNumber;
