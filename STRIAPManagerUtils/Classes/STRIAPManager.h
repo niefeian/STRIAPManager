@@ -20,8 +20,9 @@ typedef enum {
     data -> 回执
     key -> 流水号 收到服务端结果后前端根据 流水号完结指定订单
     para -> 参数
+    info->自定义携带参数，方便下级页面跳转分析
  */
-typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para , NSString *tmpid ,  NSString *transactionIdentifier , NSString *orderId );
+typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para , NSString *tmpid ,  NSString *transactionIdentifier , NSString *orderId , id info);
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 
@@ -51,7 +52,7 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
     purchID -> 商品id
     para -> 订单参数
  */
-- (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid;
+- (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info;
 
 //完结掉所有旧的订单 谨慎使用
 //- (void)finishAllTransaction;

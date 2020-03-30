@@ -91,7 +91,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 }
 
 #pragma mark - 🚪public
-- (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid {
+- (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info {
     if (purchID) {
         if ([SKPaymentQueue canMakePayments]) {
             // 开始购买服务
@@ -100,6 +100,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             [dic setValue:para forKey:@"para"];
             [dic setValue:purchID forKey:@"purchID"];
             [dic setValue:tmpid forKey:@"tmpid"];
+            [dic setValue:info forKey:@"info"];
             _para = [self dataTOjsonString:dic];
          
             NSSet *nsset = [NSSet setWithArray:@[purchID]];
@@ -327,11 +328,12 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         id p = [dic objectForKey:@"para"];
         NSString *purchID = [dic objectForKey:@"purchID"];
         NSString *tmpid = [dic objectForKey:@"tmpid"];
+        id info = [dic objectForKey:@"info"];
         if (!tmpid) {
             tmpid = @"";
         }
         
-        _handle(type,data,p,tmpid,key,purchID);
+        _handle(type,data,p,tmpid,key,purchID,info);
     }
 }
 
