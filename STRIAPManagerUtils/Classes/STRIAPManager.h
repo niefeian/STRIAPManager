@@ -25,7 +25,7 @@ typedef enum {
 typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para , NSString *tmpid ,  NSString *transactionIdentifier , NSString *orderId , id info);
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
-
+typedef void (^IAPErrorderHandle)(NSString *tmpid);
 
 /*
  transactionIdentifier 流水号
@@ -36,6 +36,9 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 
 
 @interface STRIAPManager : NSObject
+
+
+- (void)setErrorderHandle:(IAPErrorderHandle)handle;
 
 /*
     单利
