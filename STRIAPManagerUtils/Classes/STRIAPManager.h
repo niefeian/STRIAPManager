@@ -12,6 +12,7 @@ typedef enum {
     SIAPPurchVerFailed = 3,     // 订单校验失败
     SIAPPurchVerSuccess = 4,    // 订单校验成功
     SIAPPurchNotArrow = 5,      // 不允许内购
+    SIAPPurchRestored  = 6, //恢复
 }SIAPPurchType;
 
 // key -> transaction.transactionIdentifier

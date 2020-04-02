@@ -262,23 +262,27 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
        for (SKPaymentTransaction* transaction in transactions){
            if (transaction.transactionState == SKPaymentTransactionStatePurchased  || transaction.transactionState == SKPaymentTransactionStateRestored ) {
+               SIAPPurchType SIAPPurchState = transaction.transactionState == SKPaymentTransactionStatePurchased ? SIAPPurchSuccess : SIAPPurchRestored;
                if (![_willDelKey containsObject:transaction.transactionIdentifier]){
                    if (!transaction.payment.applicationUsername){
                        id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
                        if (para){
-                           [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:para];
+                           [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para];
                        }else{
                            if (_para){
-                                [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:_para];
+                                [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para];
                            }else{
                                [self finishTransaction:transaction];
                            }
                        }
                    }else{
-                       [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+                       [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
                    }
                    
                }
+           }else if (transaction.transactionState == SKPaymentTransactionStateFailed ){
+//               [[SKPaymentQueue defaultQueue] ]
+//               [self reloadNet];
            }
        }
    }
@@ -320,6 +324,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             break;
         case SIAPPurchNotArrow:
              tips = @"不允许程序内付费";
+        case SIAPPurchRestored:
+            tips = @"购买成功";
             break;
         default:
             break;
@@ -418,23 +424,24 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         [self handleActionWithType:SIAPPurchVerFailed data:nil key:@"" para:@""];
         return;
     }
+     SIAPPurchType SIAPPurchState = transaction.transactionState == SKPaymentTransactionStatePurchased ? SIAPPurchSuccess : SIAPPurchRestored;
     if (!transaction.payment.applicationUsername){
         id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
         if (para){
-            [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:para];
+            [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para];
         }else{
             #if DEBUG
                 [self blockLogTransactionIdentifier:transaction.transactionIdentifier desc:@"交易参数为空 " info:@""];
             #endif
             if (_para){
-                 [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:_para];
+                 [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para];
             }else{
                  [self finishTransaction:transaction];
             }
         }
        
     }else{
-        [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+        [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
     }
     // 购买成功将交易凭证发送给服务端进行再次校验
 //    [_map setObject:transaction forKey:transaction.transactionIdentifier];
@@ -682,7 +689,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
                    if (!jsonResponse) {
                        // 苹果服务器校验数据返回为空校验失败
-                     
+                       return ;
                    }
                    
                    // 先验证正式服务器,如果正式服务器返回21007再去苹果测试服务器验证,沙盒测试环境苹果用的是测试服务器
@@ -698,6 +705,21 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                    NSLog(@"----验证结果 %@",jsonResponse);
                  
     #endif
+                   NSDictionary *receipt = [jsonResponse objectForKey:@"receipt"];
+                   if (receipt){
+                       NSArray *array =  [receipt objectForKey:@"in_app"];
+                       if (array && array.count > 0){
+                           NSDictionary *fistDic = array.firstObject;
+                           if (fistDic){
+                               //取到最后 一单的 transaction_id ，如果a看到这个一单没有 提交过，那么异常单中 的相同的
+                               //product_id 对应的单应该是同一单，那么提交给 服务器
+//                               NSString *product_id = [fistDic objectForKey:@"product_id"];
+//                               NSString *transaction_id = [fistDic objectForKey:@"transaction_id"];
+//                               NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+//                               NSLog(@"123");
+                           }
+                       }
+                   }
                }
            }];
 }
