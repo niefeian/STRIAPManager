@@ -34,7 +34,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     NSInteger index;
     NSMutableArray *_willDelKey; // 将要结束的
 //    NSMutableArray *_lodingKey; // 正在提交的
-//    NSMutableArray *_finishKeys;
+    NSMutableArray *_finishKeys;
     NSTimer *timer;
     NSString *_para;
     BOOL isError;
@@ -58,15 +58,12 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 - (instancetype)init{
     self = [super init];
     if (self) {
-//        _finishKeys = [[NSMutableArray alloc] init];
-//        _lodingKey = [[NSMutableArray alloc] init];
+        _finishKeys = [[NSMutableArray alloc] init];
         _willDelKey = [[NSMutableArray alloc] init];
         reachability = [Reachability reachabilityForInternetConnection];
         __weak typeof(self) weakSelf = self;
         reachability.reachableBlock = ^(Reachability *reachability) {
-//            if (reachability.isReachable){
-                [weakSelf reloadNet];
-//            }
+            [weakSelf reloadNet];
         };
         [reachability startNotifier];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
@@ -125,18 +122,35 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         if ([SKPaymentQueue canMakePayments]) {
             // 开始购买服务
             _purchID = purchID;
-            
             NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
             if (transactions.count > 0) {
                 for (SKPaymentTransaction* transaction in transactions){
                     if ((transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored) && transaction.payment.productIdentifier == purchID) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
-                         [self verifyPurchaseWithPaymentTransaction:transaction];
+                        if ([_willDelKey containsObject:transaction.transactionIdentifier]){
+                            [self finishTransaction:transaction];
+                            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC));
+                            dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+                                 NSArray* transactions2 = [SKPaymentQueue defaultQueue].transactions;
+                                if (transactions2.count > 0) {
+                                    for (SKPaymentTransaction* transaction2 in transactions2){
+                                        if ((transaction2.transactionState == SKPaymentTransactionStatePurchased || transaction2.transactionState == SKPaymentTransactionStateRestored) && transaction2.payment.productIdentifier == purchID) {
+                                            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
+                                            [self verifyPurchaseWithPaymentTransaction:transaction2];
+                                        }
+                                    }
+                                }else{
+                                    [self beginPurchWithID:purchID para:para tmpid:tmpid info:info];
+                                }
+                            });
+                        }else{
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
+                            [self verifyPurchaseWithPaymentTransaction:transaction];
+                        }
                          return;
                     }else if (transaction.payment.productIdentifier == purchID){
-                        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-                       double delayInSeconds = 15.0;
-                           isError = YES;
+//                        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+                        double delayInSeconds = 15.0;
+                        isError = YES;
                           dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                           dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
                               if (self->isError){
@@ -150,16 +164,15 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                                           self->_errorhandle(tmpids);
                                       }
                                   }
-                                  [self startPurchWithID:purchID para:para tmpid:tmpid info:info];
+                                  [self beginPurchWithID:purchID para:para tmpid:tmpid info:info];
                               }
-                              
                           });
                         return;
                     }
                 }
             }
             if ([self getWillFinsh:purchID]){
-                [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+//                [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
                 double delayInSeconds = 15.0;
                     isError = YES;
                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -176,29 +189,30 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                                    self->_errorhandle(tmpids);
                                }
                            }
-                           [self startPurchWithID:purchID para:para tmpid:tmpid info:info];
+                           [self beginPurchWithID:purchID para:para tmpid:tmpid info:info];
                        }
                        
                    });
                 return;
             }
-            
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-            [dic setValue:para forKey:@"para"];
-            [dic setValue:purchID forKey:@"purchID"];
-            [dic setValue:tmpid forKey:@"tmpid"];
-            [dic setValue:info forKey:@"info"];
-            _para = [self dataTOjsonString:dic];
-         
-            NSSet *nsset = [NSSet setWithArray:@[purchID]];
-            SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
-            request.delegate = self;
-            [request start];
+            [self beginPurchWithID:purchID para:para tmpid:tmpid info:info];
         }
     }
 }
 
+- (void)beginPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info {
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic setValue:para forKey:@"para"];
+    [dic setValue:purchID forKey:@"purchID"];
+    [dic setValue:tmpid forKey:@"tmpid"];
+    [dic setValue:info forKey:@"info"];
+    _para = [self dataTOjsonString:dic];
 
+    NSSet *nsset = [NSSet setWithArray:@[purchID]];
+    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
+    request.delegate = self;
+    [request start];
+}
 
 
 
@@ -216,8 +230,18 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 //_errorFinishKey
 - (void)finishTransaction:(SKPaymentTransaction *)transaction{
-    [_willDelKey addObject:transaction.transactionIdentifier];
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    if (!_willDelKey){
+        _willDelKey = [[NSMutableArray alloc] init];
+    }
+    if (transaction.transactionIdentifier){
+        if (![_willDelKey containsObject:transaction.transactionIdentifier]){
+             [_willDelKey addObject:transaction.transactionIdentifier];
+        }
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+    }else{
+        
+    }
+    
 }
 
 -(void)reloadTransactionObserver{
@@ -239,12 +263,28 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
        for (SKPaymentTransaction* transaction in transactions){
            if (transaction.transactionState == SKPaymentTransactionStatePurchased  || transaction.transactionState == SKPaymentTransactionStateRestored ) {
                if (![_willDelKey containsObject:transaction.transactionIdentifier]){
-                    [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+                   if (!transaction.payment.applicationUsername){
+                       id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
+                       if (para){
+                           [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:para];
+                       }else{
+                           if (_para){
+                                [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:_para];
+                           }else{
+                               [self finishTransaction:transaction];
+                           }
+                       }
+                   }else{
+                       [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
+                   }
+                   
                }
            }
        }
    }
 }
+
+
 
 
 //完结掉所有旧的订单
@@ -348,7 +388,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         //这种失败不去 finishTransaction
     }else{
         [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@""];
-        [self finshProductIdentifier:transaction.payment.productIdentifier];
+//        [self finshProductIdentifier:transaction.payment.productIdentifier];
         [self finishTransaction:transaction];
     }
    
@@ -370,7 +410,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     //交易验证
     NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
     NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
-    
     if(!receipt){
         // 交易凭证为空验证失败  是否要完结订单？ 存在付了钱但是订单没回来的情况
         #if DEBUG
@@ -380,7 +419,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         return;
     }
     if (!transaction.payment.applicationUsername){
-      id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
+        id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
         if (para){
             [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:para];
         }else{
@@ -392,15 +431,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             }else{
                  [self finishTransaction:transaction];
             }
-            
-//            [self finishTransaction:transaction];
         }
        
     }else{
-//        if (![_lodingKey containsObject:transaction.transactionIdentifier]){
-//             [_lodingKey addObject:transaction.transactionIdentifier];
-//        }
-       
         [self handleActionWithType:SIAPPurchSuccess data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername];
     }
     // 购买成功将交易凭证发送给服务端进行再次校验
@@ -458,16 +491,19 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 -(void)finshProductIdentifier:(NSString *)productIdentifier{
      NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
     [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:productIdentifierKey];
-//       setBool:NO forKey:productIdentifierKey];
+    NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+      if (transactions.count > 0) {
+          for (SKPaymentTransaction* transaction in transactions){
+              if (!(transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored) && transaction.payment.productIdentifier == productIdentifier){
+                  [self finishTransaction:transaction];
+              }
+          }
+      }
 }
 
 -(BOOL)getWillFinsh:(NSString *)productIdentifier{
-      NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
-//    [[NSUserDefaults standardUserDefaults] objectForKey:productIdentifierKey] == YES;
+    NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
     NSString *noFish = [[NSUserDefaults standardUserDefaults] objectForKey:productIdentifierKey];
-//    if (!noFish){
-//        noFish = @"0";
-//    }
     return ([@"1" isEqualToString:noFish]);
 }
 
@@ -508,7 +544,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
     #if DEBUG
     NSLog(@"--------------updatedTransactions------------------");
-    
     [self blockLogTransactionIdentifier:@"" desc:[NSString stringWithFormat:@"商品出现更新,总数量%lu",(unsigned long)transactions.count] info:@""];
     #endif
     for (SKPaymentTransaction *tran in transactions) {
