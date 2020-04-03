@@ -39,6 +39,9 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 @interface STRIAPManager : NSObject
 
 
+//是否自动尝试恢复订单默认yes 自动续订 需要设置为false
+- (void)autoRestoreCompletedTransactions:(BOOL)autoRestores;
+
 - (void)setErrorderHandle:(IAPErrorderHandle)handle;
 
 /*

@@ -38,6 +38,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     NSTimer *timer;
     NSString *_para;
     BOOL isError;
+    BOOL _autoRestores;
+    
     Reachability *reachability;
 }
 @end
@@ -67,6 +69,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         };
         [reachability startNotifier];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        _autoRestores = YES;
         //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
         index = 0;
         timer =  [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadErrorfinishTransaction) userInfo:nil repeats:YES];
@@ -75,9 +78,15 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     return self;
 }
 
--(void)reloadNet{
+- (void)autoRestoreCompletedTransactions:(BOOL)autoRestores{
+    _autoRestores = autoRestores;
+}
 
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+-(void)reloadNet{
+    
+    if (_autoRestores){
+         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    }
     
    [self reloadTransactionObserver];
 }
