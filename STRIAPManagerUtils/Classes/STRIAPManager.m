@@ -226,12 +226,14 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 
 //根据 key 完结掉指定订单
--(void)finishTransactionByTransactionIdentifier:(NSString *)transactionIdentifier;{
+-(void)finishTransactionByTransactionIdentifier:(NSString *)transactionIdentifier{
         NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
         if (transactions.count > 0) {
         for (SKPaymentTransaction* transaction in transactions){
-              if (transaction.transactionIdentifier == transactionIdentifier) {
-                  [self finishTransaction:transaction];
+            if (transaction && transaction.transactionIdentifier){
+                if ([transaction.transactionIdentifier isEqualToString: transactionIdentifier]) {
+                      [self finishTransaction:transaction];
+                }
             }
         }
     }
