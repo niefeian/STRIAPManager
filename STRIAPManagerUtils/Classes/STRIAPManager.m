@@ -92,31 +92,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 }
 
 -(void)reloadErrorfinishTransaction{
-    index = index + 1;
-//    if (index%10 == 0) {
     if (reachability.isReachable){
           [self reloadTransactionObserver];
     }
-      
-//    }
-//    else if (_finishKeys.count > 0){
-//        NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
-//        NSArray *array = [[NSArray alloc] initWithArray:_finishKeys];
-//        [_finishKeys removeAllObjects];
-//        if (transactions.count > 0) {
-//            for (SKPaymentTransaction* transaction in transactions){
-//                  if ([array containsObject:transaction.transactionIdentifier]) {
-//                      [_finishKeys addObject:transaction.transactionIdentifier];
-//                      [self finishTransaction:transaction];
-//                  }else if (transaction.transactionState == SKPaymentTransactionStateFailed){
-//                        [_finishKeys addObject:transaction.transactionIdentifier];
-//                        [self finishTransaction:transaction];
-//                  }
-//            }
-//        }else{
-//            [_finishKeys removeAllObjects];
-//        }
-//    }
 }
 
 #pragma mark - 设置订单信息的回调
@@ -134,7 +112,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
             if (transactions.count > 0) {
                 for (SKPaymentTransaction* transaction in transactions){
-                    if ((transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored) && transaction.payment.productIdentifier == purchID) {
+                    if ((transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored) && [transaction.payment.productIdentifier isEqualToString: purchID]) {
                         if ([_willDelKey containsObject:transaction.transactionIdentifier]){
                             [self finishTransaction:transaction];
                             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC));
@@ -142,7 +120,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                                  NSArray* transactions2 = [SKPaymentQueue defaultQueue].transactions;
                                 if (transactions2.count > 0) {
                                     for (SKPaymentTransaction* transaction2 in transactions2){
-                                        if ((transaction2.transactionState == SKPaymentTransactionStatePurchased || transaction2.transactionState == SKPaymentTransactionStateRestored) && transaction2.payment.productIdentifier == purchID) {
+                                        if ((transaction2.transactionState == SKPaymentTransactionStatePurchased || transaction2.transactionState == SKPaymentTransactionStateRestored) && [transaction2.payment.productIdentifier isEqualToString: purchID]) {
                                             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
                                             [self verifyPurchaseWithPaymentTransaction:transaction2];
                                         }
@@ -156,7 +134,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                             [self verifyPurchaseWithPaymentTransaction:transaction];
                         }
                          return;
-                    }else if (transaction.payment.productIdentifier == purchID){
+                    }else if ([transaction.payment.productIdentifier isEqualToString:  purchID]){
 //                        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
                         double delayInSeconds = 15.0;
                         isError = YES;
@@ -512,7 +490,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
       if (transactions.count > 0) {
           for (SKPaymentTransaction* transaction in transactions){
-              if (!(transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored) && transaction.payment.productIdentifier == productIdentifier){
+              if (!(transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored) && [transaction.payment.productIdentifier isEqualToString: productIdentifier]){
                   [self finishTransaction:transaction];
               }
           }
