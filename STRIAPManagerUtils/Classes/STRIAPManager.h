@@ -44,6 +44,8 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 
 - (void)setErrorderHandle:(IAPErrorderHandle)handle;
 
+
+-(void)finishTransactionByPurchID:(NSString *)purchID;
 /*
     单利
  */

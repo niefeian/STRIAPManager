@@ -159,7 +159,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 }
             }
             if ([self getWillFinsh:purchID]){
-//                [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
                 double delayInSeconds = 15.0;
                     isError = YES;
                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -210,6 +209,20 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         for (SKPaymentTransaction* transaction in transactions){
             if (transaction && transaction.transactionIdentifier){
                 if ([transaction.transactionIdentifier isEqualToString: transactionIdentifier]) {
+                      [self finishTransaction:transaction];
+                }
+            }
+        }
+    }
+}
+
+
+-(void)finishTransactionByPurchID:(NSString *)purchID{
+        NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+        if (transactions.count > 0) {
+        for (SKPaymentTransaction* transaction in transactions){
+            if (transaction && transaction.payment  && transaction.payment.productIdentifier){
+                if ([transaction.payment.productIdentifier isEqualToString: purchID]) {
                       [self finishTransaction:transaction];
                 }
             }
