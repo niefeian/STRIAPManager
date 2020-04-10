@@ -54,6 +54,7 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 /*
     设置订单回调，所有购买都从一个入口去h处理 根据 IAPCompletionHandle 区分订单
  */
+//自动续订的恢复购买走下面的接口 verifySubscribe 这边会返回自动续订的商品信息，需要自己去拦截掉  SIAPPurchRestored 
 - (void)setCompleteHandle:(IAPCompletionHandle)handle;
 
 /*
@@ -64,7 +65,7 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 - (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info;
 
 //完结掉所有旧的订单 谨慎使用
-//- (void)finishAllTransaction;
+- (void)finishAllTransaction;
 
 /*
     根据 key 完结掉指定订单
@@ -81,8 +82,10 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 
 
 #pragma mark - 以下涉及到自动续订会员恢复
-- (void)restoreCompletedTransactions;
+- (void)restoreCompletedTransactionsPara:(id)para ;
 
+
+//自动续订的恢复购买走这边的流程
 - (void)verifySubscribe:(IAPSubscribeHandle)handle;
 
 #pragma mark -  订单校验 前端s测试用
