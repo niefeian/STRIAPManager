@@ -40,6 +40,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     BOOL _autoRestores;
     BOOL _isRestores;//正在恢复中，优先处理恢复数据
     Reachability *reachability;
+    NSInteger _dorpLastRestores;
+    
 }
 @end
 @implementation STRIAPManager
@@ -62,6 +64,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         _finishKeys = [[NSMutableArray alloc] init];
         _willDelKey = [[NSMutableArray alloc] init];
         reachability = [Reachability reachabilityForInternetConnection];
+        _dorpLastRestores = 0;
         __weak typeof(self) weakSelf = self;
         reachability.reachableBlock = ^(Reachability *reachability) {
             [weakSelf reloadNet];
@@ -82,12 +85,15 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 }
 
 -(void)reloadNet{
-    
+//    if (!_autoRestores) {
+//        _dorpLastRestores += 1;
+//    }
+//    [[SKPaymentQueue defaultQueue] re]
     if (_autoRestores){
-         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     }
-    
-   [self reloadTransactionObserver];
+   
+    [self reloadTransactionObserver];
 }
 
 -(void)reloadErrorfinishTransaction{
@@ -381,29 +387,42 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     [dic setValue:@"" forKey:@"info"];
     _para = [self dataTOjsonString:dic];
     _isRestores = YES;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-        self->_isRestores = NO;
-    });
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
 
+
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
-     NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
+    
+//    if (_dorpLastRestores > 0){
+//        _dorpLastRestores -= 1;
+//        for (SKPaymentTransaction *transaction in queue.transactions){
+//            [queue finishTransaction:transaction];
+//        }
+//        return;
+//    }
+    
+    NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
+    NSTimeInterval byNow = 0;
+    NSString *productID = @"";
+    NSString *transactionIdentifier = @"";
     for (SKPaymentTransaction *transaction in queue.transactions){
-        NSString *productID = transaction.payment.productIdentifier;
-        NSString *transactionIdentifier = transaction.transactionIdentifier;
-        if (productID && transactionIdentifier){
-            NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
-             [map setValue:productID forKey:@"productID"];
-             [map setValue:transactionIdentifier forKey:@"transactionIdentifier"];
-            [purchasedItemIDs addObject:map];
-            if(_subhandle){
-                _subhandle(purchasedItemIDs);
-            }
-            _isRestores = NO;
-            return;
+        if (!byNow) {
+            byNow =  transaction.transactionDate.timeIntervalSinceNow;
+            productID = transaction.payment.productIdentifier;
+            transactionIdentifier = transaction.transactionIdentifier;
         }
+        
+        if (byNow < transaction.transactionDate.timeIntervalSinceNow){
+            byNow =  transaction.transactionDate.timeIntervalSinceNow;
+            productID = transaction.payment.productIdentifier;
+            transactionIdentifier = transaction.transactionIdentifier;
+        }
+    }
+    if (productID && transactionIdentifier){
+        NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
+        [map setValue:productID forKey:@"productID"];
+        [map setValue:transactionIdentifier forKey:@"transactionIdentifier"];
+        [purchasedItemIDs addObject:map];
     }
     if(_subhandle){
         _subhandle(purchasedItemIDs);
@@ -422,10 +441,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if (transaction.error.code != SKErrorPaymentCancelled) {
         [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"网络连接失败,请稍后尝试~"];
-        //这种失败不去 finishTransaction
     }else{
         [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
-//        [self finshProductIdentifier:transaction.payment.productIdentifier];
         [self finishTransaction:transaction];
     }
    
@@ -522,7 +539,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 -(void)willFinshProductIdentifier:(NSString *)productIdentifier{
      NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
-      [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:productIdentifierKey];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:productIdentifierKey];
 }
 
 
