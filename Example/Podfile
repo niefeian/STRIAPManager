@@ -1,5 +1,7 @@
 use_frameworks!
 
+source 'https://github.com/CocoaPods/Specs.git'
+
 target 'STRIAPManagerUtils_Tests' do
   pod 'STRIAPManagerUtils', :path => '../'
 #  pod 'Reachability'
