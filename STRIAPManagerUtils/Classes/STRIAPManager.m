@@ -370,8 +370,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         if (!tmpid) {
             tmpid = @"";
         }
-        if (![@"" isEqualToString:purchID]){
-            purchIDs = purchID;
+        
+        if (![@"" isEqualToString:purchID] && purchID){
+          purchIDs = purchID;
         }
        
         _handle(type,data,p,tmpid,key,purchIDs,info);
