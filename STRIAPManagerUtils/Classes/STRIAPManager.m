@@ -419,7 +419,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             transactionIdentifier = transaction.transactionIdentifier;
         }
     }
-    if (productID && transactionIdentifier){
+    if (![@"" isEqualToString: productID] && ![@"" isEqualToString: transactionIdentifier]){
         NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
         [map setValue:productID forKey:@"productID"];
         [map setValue:transactionIdentifier forKey:@"transactionIdentifier"];
