@@ -617,8 +617,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"已经购买过商品" info:@""];
                 #endif
                 // 消耗型不支持恢复购买
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
                 if (![tran.payment.productIdentifier isEqualToString:_subscribeId]){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
                     [self verifyPurchaseWithPaymentTransaction:tran];
                 }
 //                 [self finshProductIdentifier:tran.payment.productIdentifier];
