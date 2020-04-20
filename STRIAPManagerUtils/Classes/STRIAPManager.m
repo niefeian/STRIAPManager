@@ -274,25 +274,25 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
            if (transaction.transactionState == SKPaymentTransactionStatePurchased  || transaction.transactionState == SKPaymentTransactionStateRestored ) {
                SIAPPurchType SIAPPurchState = transaction.transactionState == SKPaymentTransactionStatePurchased ? SIAPPurchSuccess : SIAPPurchRestored;
                if (![_willDelKey containsObject:transaction.transactionIdentifier]){
-                   if (!transaction.payment.applicationUsername){
-                       id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
-                       if (para){
+                if (transaction.payment.productIdentifier && ![transaction.payment.productIdentifier isEqualToString:_subscribeId]){
+                    if (!transaction.payment.applicationUsername){
+                        id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
+                        if (para){
                            [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para purchID:transaction.payment.productIdentifier];
-                       }else{
+                        }else{
                            if (_para){
                                 [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para purchID:transaction.payment.productIdentifier];
                            }else{
                                [self finishTransaction:transaction];
                            }
-                       }
-                   }else{
-                       [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
-                   }
-                   
+                        }
+                    }else{
+                        [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
+                    }
+                }
                }
            }else if (transaction.transactionState == SKPaymentTransactionStateFailed ){
-//               [[SKPaymentQueue defaultQueue] ]
-//               [self reloadNet];
+               [self finishTransaction:transaction];
            }
        }
    }
@@ -396,14 +396,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
-    
-//    if (_dorpLastRestores > 0){
-//        _dorpLastRestores -= 1;
-//        for (SKPaymentTransaction *transaction in queue.transactions){
-//            [queue finishTransaction:transaction];
-//        }
-//        return;
-//    }
     
     NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
     NSTimeInterval byNow = 0;
@@ -637,8 +629,11 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 #endif
                 // 消耗型不支持恢复购买
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
-                 [self verifyPurchaseWithPaymentTransaction:tran];
-                 [self finshProductIdentifier:tran.payment.productIdentifier];
+                if (![tran.payment.productIdentifier isEqualToString:_subscribeId]){
+                    [self verifyPurchaseWithPaymentTransaction:tran];
+                }
+//                 [self finshProductIdentifier:tran.payment.productIdentifier];
+                [self finishTransaction:tran];
                 isError = NO;
                 break;
             case SKPaymentTransactionStateFailed:
