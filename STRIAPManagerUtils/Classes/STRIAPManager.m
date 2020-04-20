@@ -65,6 +65,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         _willDelKey = [[NSMutableArray alloc] init];
         reachability = [Reachability reachabilityForInternetConnection];
         _dorpLastRestores = 0;
+        _subscribeId = @"";
         __weak typeof(self) weakSelf = self;
         reachability.reachableBlock = ^(Reachability *reachability) {
             [weakSelf reloadNet];
