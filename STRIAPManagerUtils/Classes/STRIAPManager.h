@@ -38,6 +38,10 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 
 @interface STRIAPManager : NSObject
 
+/*
+ 自动续订的id ，当出现此id 是续订流程将会简化
+ */
+@property(nonatomic,strong) NSString* subscribeId;
 
 //是否自动尝试恢复订单默认yes 自动续订 需要设置为false
 - (void)autoRestoreCompletedTransactions:(BOOL)autoRestores;
