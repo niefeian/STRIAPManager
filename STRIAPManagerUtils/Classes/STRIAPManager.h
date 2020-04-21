@@ -33,7 +33,7 @@ typedef void (^IAPErrorderHandle)(NSString *tmpid);
  desc 报错描述
  info 报错信息
  */
-typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , NSError *error);
+typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , NSError *error , NSString *applicationUsername);
 
 
 @interface STRIAPManager : NSObject

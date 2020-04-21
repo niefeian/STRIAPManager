@@ -446,12 +446,18 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 // 交易失败
 - (void)failedTransaction:(SKPaymentTransaction *)transaction{
-    if (transaction.error.code != SKErrorPaymentCancelled) {
-        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
-    }else{
-        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
-    }
+//    if (transaction.error.code != SKErrorPaymentCancelled) {
+//
+//
+////        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"网络连接失败,请稍后尝试~"];
+//    }else{
+//        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
+//    }
     switch (transaction.error.code) {
+        case SKErrorUnknown:
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
+           break;
         case SKErrorClientInvalid:
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
             break;
@@ -500,13 +506,17 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"所选报价的价格无效"];
             break;
         case -1001:
-           [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"请求超时，请稍后再试"];
-           break;
-         default:
-          [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"购买失败，请稍后重试~"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"请求超时，请稍后再试"];
+            break;
+        default:
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"购买失败，请稍后重试~"];
         break;
     }
-    [self blockLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error];
+    if (!transaction.payment.applicationUsername){
+        [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:@""];
+    }else{
+        [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:transaction.payment.applicationUsername];
+    }
     [self finishTransaction:transaction];
    
 }
@@ -701,9 +711,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                 isError = NO;
                 break;
             case SKPaymentTransactionStateFailed:
-                #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买失败" error:tran.error];
-                #endif
                 [self failedTransaction:tran];
                 break;
             default:
@@ -723,15 +730,20 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 -(void)blockLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  error:(NSError *)error {
     if (_log){
         if (error) {
-            _log(transactionIdentifier,desc,error);
+            _log(transactionIdentifier,desc,error,@"");
         }
 //        else{
 //            _log(transactionIdentifier,desc,[[NSError alloc] init]);
 //        }
     }
 }
-
-
+-(void)blockErrorLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  error:(NSError *)error  applicationUsername:(NSString *)applicationUsername {
+    if (_log){
+        if (error) {
+            _log(transactionIdentifier,desc,error,applicationUsername);
+        }
+    }
+}
 
 - (void)dealloc{
     [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
