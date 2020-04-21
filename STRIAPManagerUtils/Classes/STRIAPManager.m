@@ -502,7 +502,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         case -1001:
            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"请求超时，请稍后再试"];
            break;
-        default:
+         default:
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"购买失败，请稍后重试~"];
         break;
     }
     [self blockLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error];
