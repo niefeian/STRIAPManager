@@ -48,6 +48,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 #pragma mark - ♻️life cycle
 
+
 + (instancetype)shareSIAPManager{
     static STRIAPManager *IAPManager = nil;
     static dispatch_once_t onceToken;
@@ -63,7 +64,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         _finishKeys = [[NSMutableArray alloc] init];
         _willDelKey = [[NSMutableArray alloc] init];
         reachability = [Reachability reachabilityForInternetConnection];
-        _dorpLastRestores = 0;
+//        _dorpLastRestores = 0;
         _subscribeId = @"";
         __weak typeof(self) weakSelf = self;
         reachability.reachableBlock = ^(Reachability *reachability) {
@@ -93,15 +94,13 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }
 }
 
+
 - (void)autoRestoreCompletedTransactions:(BOOL)autoRestores{
     _autoRestores = autoRestores;
 }
 
 -(void)reloadNet{
-//    if (!_autoRestores) {
-//        _dorpLastRestores += 1;
-//    }
-//    [[SKPaymentQueue defaultQueue] re]
+    
     if (_autoRestores){
         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     }
@@ -122,7 +121,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 #pragma mark - 🚪public
 - (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info {
-
+    
     if (purchID) {
         if ([SKPaymentQueue canMakePayments]) {
             // 开始购买服务
@@ -173,7 +172,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                              if (self->isError){
                                  self->isError = NO;
                                  [self finshProductIdentifier:purchID];
-                                  id paras =  [[NSUserDefaults standardUserDefaults] objectForKey:purchID];
+                                
+                                 id paras =  [[NSUserDefaults standardUserDefaults] objectForKey:purchID];
                                 
                                  if (self->_errorhandle && paras) {
                                       NSDictionary *dic = [self dictionaryWithJsonString:paras];
@@ -229,13 +229,13 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 -(void)finishTransactionByPurchID:(NSString *)purchID{
         NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
         if (transactions.count > 0) {
-        for (SKPaymentTransaction* transaction in transactions){
-            if (transaction && transaction.payment  && transaction.payment.productIdentifier){
-                if ([transaction.payment.productIdentifier isEqualToString: purchID]) {
-                      [self finishTransaction:transaction];
+            for (SKPaymentTransaction* transaction in transactions){
+                if (transaction && transaction.payment  && transaction.payment.productIdentifier){
+                    if ([transaction.payment.productIdentifier isEqualToString: purchID]) {
+                          [self finishTransaction:transaction];
+                    }
                 }
             }
-        }
     }
 }
 
@@ -267,36 +267,36 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     });
     
     index = 1;
-    NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
-   if (transactions.count > 0 ) {
-        NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
-        NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
-       for (SKPaymentTransaction* transaction in transactions){
-           if (transaction.transactionState == SKPaymentTransactionStatePurchased  || transaction.transactionState == SKPaymentTransactionStateRestored ) {
-               SIAPPurchType SIAPPurchState = transaction.transactionState == SKPaymentTransactionStatePurchased ? SIAPPurchSuccess : SIAPPurchRestored;
-               if (![_willDelKey containsObject:transaction.transactionIdentifier]){
-                if (transaction.payment.productIdentifier && ![transaction.payment.productIdentifier isEqualToString:_subscribeId]){
-                    if (!transaction.payment.applicationUsername){
-                        id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
-                        if (para){
-                           [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para purchID:transaction.payment.productIdentifier];
+        NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
+       if (transactions.count > 0 ) {
+            NSURL *recepitURL = [[NSBundle mainBundle] appStoreReceiptURL];
+            NSData *receipt = [NSData dataWithContentsOfURL:recepitURL];
+           for (SKPaymentTransaction* transaction in transactions){
+               if (transaction.transactionState == SKPaymentTransactionStatePurchased  || transaction.transactionState == SKPaymentTransactionStateRestored ) {
+                   SIAPPurchType SIAPPurchState = transaction.transactionState == SKPaymentTransactionStatePurchased ? SIAPPurchSuccess : SIAPPurchRestored;
+                   if (![_willDelKey containsObject:transaction.transactionIdentifier]){
+                    if (transaction.payment.productIdentifier && ![transaction.payment.productIdentifier isEqualToString:_subscribeId]){
+                        if (!transaction.payment.applicationUsername){
+                            id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
+                            if (para){
+                               [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para purchID:transaction.payment.productIdentifier];
+                            }else{
+                               if (_para){
+                                    [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para purchID:transaction.payment.productIdentifier];
+                               }else{
+                                   [self finishTransaction:transaction];
+                               }
+                            }
                         }else{
-                           if (_para){
-                                [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para purchID:transaction.payment.productIdentifier];
-                           }else{
-                               [self finishTransaction:transaction];
-                           }
+                            [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
                         }
-                    }else{
-                        [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
                     }
-                }
+                   }
+               }else if (transaction.transactionState == SKPaymentTransactionStateFailed ){
+                   [self finishTransaction:transaction];
                }
-           }else if (transaction.transactionState == SKPaymentTransactionStateFailed ){
-               [self finishTransaction:transaction];
            }
        }
-   }
 }
 
 
@@ -349,7 +349,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     
     #if DEBUG
     NSLog(@"%@", tips);
-    [self blockLogTransactionIdentifier:key desc:tips info:@""];
+    [self blockLogTransactionIdentifier:key desc:tips error:nil];
     #endif
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:tips];
     if(_handle){
@@ -360,7 +360,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         if (!dic){
             //参数完全丢失
             #if DEBUG
-            [self blockLogTransactionIdentifier:key desc:@"交易参数完全丢失无法进行下一步 " info:@""];
+            [self blockLogTransactionIdentifier:key desc:@"交易参数完全丢失无法进行下一步 " error:nil];
             #endif
             return;
         }
@@ -393,6 +393,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     _para = [self dataTOjsonString:dic];
     _isRestores = YES;
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+  
 }
 
 
@@ -445,12 +446,67 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 // 交易失败
 - (void)failedTransaction:(SKPaymentTransaction *)transaction{
-    if (transaction.error.code != SKErrorPaymentCancelled) {
-        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"网络连接失败,请稍后尝试~"];
-    }else{
-        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
+//    if (transaction.error.code != SKErrorPaymentCancelled) {
+//
+//
+////        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"网络连接失败,请稍后尝试~"];
+//    }else{
+//        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
+//    }
+    switch (transaction.error.code) {
+        case SKErrorClientInvalid:
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
+            break;
+        case SKErrorPaymentCancelled:
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消购买"];
+           break;
+        case SKErrorPaymentInvalid:
+//            purchase identifier无效
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"商品已失效"];
+            break;
+        case SKErrorPaymentNotAllowed:
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"此设备不允许付款"];
+            break;
+        case SKErrorStoreProductNotAvailable :
+//            当前店面中没有产品
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"商品已失效"];
+            break;
+        case SKErrorCloudServicePermissionDenied :
+//            用户不允许访问云服务信息
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户不允许访问云服务信息"];
+            break;
+        case SKErrorCloudServiceNetworkConnectionFailed :
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"设备无法连接到网络"];
+            break;
+        case SKErrorCloudServiceRevoked:
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户已吊销使用此云服务的权限"];
+            break;
+        case SKErrorPrivacyAcknowledgementRequired  :
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户需要确认苹果的隐私政策"];
+              break;
+        case SKErrorUnauthorizedRequestData:
+//            应用程序正在尝试使用SKPayment的requestData属性，但没有相应的权限
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"暂无购买权限"];
+              break;
+        case SKErrorInvalidOfferIdentifier:
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"指定的订阅发行标识无效"];
+            break;
+        case SKErrorInvalidSignature  :
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"提供的加密签名无效"];
+            break;
+        case SKErrorMissingOfferParams:
+//            SKPaymentDiscount中缺少一个或多个参数
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"参数有误"];
+            break;
+        case SKErrorInvalidOfferPrice:
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"所选报价的价格无效"];
+            break;
+        default:
+        break;
     }
+    [self blockLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error];
+    
     [self finishTransaction:transaction];
    
 }
@@ -474,7 +530,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if(!receipt){
         // 交易凭证为空验证失败  是否要完结订单？ 存在付了钱但是订单没回来的情况
         #if DEBUG
-         [self blockLogTransactionIdentifier:@"" desc:@"交易凭证为空 " info:@""];
+         [self blockLogTransactionIdentifier:@"" desc:@"交易凭证为空 " error:nil];
         #endif
         [self handleActionWithType:SIAPPurchVerFailed data:nil key:@"" para:@"" purchID:@""];
         return;
@@ -486,7 +542,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para purchID:transaction.payment.productIdentifier];
         }else{
             #if DEBUG
-                [self blockLogTransactionIdentifier:transaction.transactionIdentifier desc:@"交易参数为空 " info:@""];
+                [self blockLogTransactionIdentifier:transaction.transactionIdentifier desc:@"交易参数为空 " error:nil];
             #endif
             if (_para){
                  [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para purchID:transaction.payment.productIdentifier];
@@ -498,8 +554,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }else{
         [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
     }
-    // 购买成功将交易凭证发送给服务端进行再次校验
-//    [_map setObject:transaction forKey:transaction.transactionIdentifier];
     
 }
 
@@ -509,7 +563,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if([product count] <= 0){
 #if DEBUG
         NSLog(@"--------------没有商品------------------");
-        [self blockLogTransactionIdentifier:@"" desc:@"没有商品 " info:@""];
+        [self blockLogTransactionIdentifier:@"" desc:@"没有商品 " error:nil];
 #endif
         return;
     }
@@ -532,7 +586,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     NSLog(@"%@",[p productIdentifier]);
     NSLog(@"发送购买请求");
 
-    [self blockLogTransactionIdentifier:@"" desc:@"订单生成 发送购买请求 " info:@""];
+    [self blockLogTransactionIdentifier:@"" desc:@"订单生成 发送购买请求 " error:nil];
 #endif
 
     NSString *productIdentifier = [p productIdentifier];
@@ -545,14 +599,15 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 }
 
 -(void)willFinshProductIdentifier:(NSString *)productIdentifier{
-     NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
-    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:productIdentifierKey];
+//     NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:productIdentifierKey];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 
 -(void)finshProductIdentifier:(NSString *)productIdentifier{
-    NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
-    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:productIdentifierKey];
+//    NSString *productIdentifierKey = [NSString stringWithFormat: @"%@willFinsh", productIdentifier];
+//    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:productIdentifierKey];
     NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
       if (transactions.count > 0) {
           for (SKPaymentTransaction* transaction in transactions){
@@ -571,7 +626,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-      [self blockLogTransactionIdentifier:@"" desc:@"用户取消操作" info:@""];
+      [self blockLogTransactionIdentifier:@"" desc:@"用户取消操作" error:error];
       [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消操作"];
 }
 
@@ -580,7 +635,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"当前网络不给力,请稍后再试~"];
    #if DEBUG
         NSLog(@"------------------错误-----------------:%@", error);
-       [self blockLogTransactionIdentifier:@"" desc:@"唤醒内购失败 " info:error.localizedDescription];
+       [self blockLogTransactionIdentifier:@"" desc:@"唤醒内购失败 " error:error];
    #endif
     
 }
@@ -588,7 +643,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 - (void)requestDidFinish:(SKRequest *)request{
     #if DEBUG
       NSLog(@"------------------反馈信息结束-----------------");
-     [self blockLogTransactionIdentifier:@"" desc:@"反馈信息结束" info:@""];
+     [self blockLogTransactionIdentifier:@"" desc:@"反馈信息结束" error:nil];
     #endif
 }
 
@@ -600,52 +655,60 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             [_willDelKey removeObject:tran.transactionIdentifier];
         }
     }
+    
+//    _dorpLastRestores -= 1;
+//    NSLog(@"%ld", (long)_dorpLastRestores);
+//    #if DEBUG
+//    NSLog(@"剩余的ID:%lu", (unsigned long)[SKPaymentQueue defaultQueue].transactions.count);
+//    #endif
 }
+
 
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
     #if DEBUG
     NSLog(@"--------------updatedTransactions------------------");
-    [self blockLogTransactionIdentifier:@"" desc:[NSString stringWithFormat:@"商品出现更新,总数量%lu",(unsigned long)transactions.count] info:@""];
+    [self blockLogTransactionIdentifier:@"" desc:[NSString stringWithFormat:@"商品出现更新,总数量%lu",(unsigned long)transactions.count] error:nil];
     #endif
     for (SKPaymentTransaction *tran in transactions) {
         switch (tran.transactionState) {
             case SKPaymentTransactionStatePurchased:
                 [self verifyPurchaseWithPaymentTransaction:tran];
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买完成即将提交服务端校验" info:@""];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买完成即将提交服务端校验" error:nil];
                 #endif
                 [self finshProductIdentifier:tran.payment.productIdentifier];
                 isError = NO;
                 break;
             case SKPaymentTransactionStatePurchasing:
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品添加进列表" info:@""];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品添加进列表" error:nil];
                 #endif
                 [self willFinshProductIdentifier:tran.payment.productIdentifier];
                 break;
             case SKPaymentTransactionStateRestored:
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"已经购买过商品" info:@""];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"已经购买过商品" error:nil];
                 #endif
                 // 消耗型不支持恢复购买
                 if (![tran.payment.productIdentifier isEqualToString:_subscribeId]){
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLonding" object:@"正在恢复"];
                     [self verifyPurchaseWithPaymentTransaction:tran];
                 }
-//                 [self finshProductIdentifier:tran.payment.productIdentifier];
+//                _dorpLastRestores += 1;
+//                NSLog(@"%ld", (long)_dorpLastRestores);
                 [self finishTransaction:tran];
                 isError = NO;
                 break;
             case SKPaymentTransactionStateFailed:
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买失败" info:tran.error.localizedDescription];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品购买失败" error:tran.error];
                 #endif
                 [self failedTransaction:tran];
                 break;
             default:
                 #if DEBUG
-                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品出现未知状态" info:tran.error.localizedDescription];
+                [self blockLogTransactionIdentifier:tran.transactionIdentifier desc:@"商品出现未知状态" error:tran.error];
                 #endif
                 break;
         }
@@ -657,9 +720,14 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     _log = log;
 }
 
--(void)blockLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  info:(NSString *)info {
+-(void)blockLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  error:(NSError *)error {
     if (_log){
-        _log(transactionIdentifier,desc,info);
+        if (error) {
+            _log(transactionIdentifier,desc,error);
+        }
+//        else{
+//            _log(transactionIdentifier,desc,[[NSError alloc] init]);
+//        }
     }
 }
 

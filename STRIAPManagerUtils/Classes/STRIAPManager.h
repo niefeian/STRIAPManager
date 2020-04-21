@@ -33,7 +33,7 @@ typedef void (^IAPErrorderHandle)(NSString *tmpid);
  desc 报错描述
  info 报错信息
  */
-typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,NSString * info);
+typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , NSError *error);
 
 
 @interface STRIAPManager : NSObject
@@ -45,11 +45,11 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
 
 @property(nonatomic,assign) BOOL beginTimer;//开启定时器 ，默认是YES ，关闭定时器，可能会出现丢单问题
 
-
 //是否自动尝试恢复订单默认yes 自动续订 需要设置为false
 - (void)autoRestoreCompletedTransactions:(BOOL)autoRestores;
 
 - (void)setErrorderHandle:(IAPErrorderHandle)handle;
+
 
 -(void)finishTransactionByPurchID:(NSString *)purchID;
 /*
