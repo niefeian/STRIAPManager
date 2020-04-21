@@ -499,6 +499,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         case SKErrorInvalidOfferPrice:
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"所选报价的价格无效"];
             break;
+        case -1001:
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"请求超时，请稍后再试"];
+           break;
         default:
         break;
     }
