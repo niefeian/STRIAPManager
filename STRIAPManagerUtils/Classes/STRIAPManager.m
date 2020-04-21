@@ -517,6 +517,13 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }else{
         [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:transaction.payment.applicationUsername];
     }
+    
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
+    }else{
+        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
+    }
+    
     [self finishTransaction:transaction];
    
 }
