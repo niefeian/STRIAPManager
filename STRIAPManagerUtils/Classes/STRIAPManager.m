@@ -48,7 +48,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 #pragma mark - ♻️life cycle
 
-
 + (instancetype)shareSIAPManager{
     static STRIAPManager *IAPManager = nil;
     static dispatch_once_t onceToken;
@@ -77,8 +76,21 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         index = 0;
         timer =  [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadErrorfinishTransaction) userInfo:nil repeats:YES];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTransactionObserver) name:ReloadTransactionObserver object:nil];
+        _beginTimer = YES;
     }
     return self;
+}
+
+-(void)setBeginTimer:(BOOL)beginTimer{
+    if (_beginTimer != beginTimer){
+        _beginTimer = beginTimer;
+        if (_beginTimer){
+            timer =  [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadErrorfinishTransaction) userInfo:nil repeats:YES];
+        }else{
+           [timer invalidate];
+           timer =  nil;
+        }
+    }
 }
 
 - (void)autoRestoreCompletedTransactions:(BOOL)autoRestores{

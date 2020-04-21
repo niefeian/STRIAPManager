@@ -43,11 +43,13 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc ,N
  */
 @property(nonatomic,strong) NSString* subscribeId;
 
+@property(nonatomic,assign) BOOL beginTimer;//开启定时器 ，默认是YES ，关闭定时器，可能会出现丢单问题
+
+
 //是否自动尝试恢复订单默认yes 自动续订 需要设置为false
 - (void)autoRestoreCompletedTransactions:(BOOL)autoRestores;
 
 - (void)setErrorderHandle:(IAPErrorderHandle)handle;
-
 
 -(void)finishTransactionByPurchID:(NSString *)purchID;
 /*
