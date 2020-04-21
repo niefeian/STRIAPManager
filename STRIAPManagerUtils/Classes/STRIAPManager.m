@@ -446,14 +446,11 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 // 交易失败
 - (void)failedTransaction:(SKPaymentTransaction *)transaction{
-//    if (transaction.error.code != SKErrorPaymentCancelled) {
-//
-//
-////        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"网络连接失败,请稍后尝试~"];
-//    }else{
-//        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
-//    }
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
+    }else{
+        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
+    }
     switch (transaction.error.code) {
         case SKErrorClientInvalid:
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
@@ -506,7 +503,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         break;
     }
     [self blockLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error];
-    
     [self finishTransaction:transaction];
    
 }
