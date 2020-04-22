@@ -1,5 +1,18 @@
 # STRIAPManagerUtils
 
+
+
+## version 0.1.6
+```
+新增接口
+- (void)restoreCompletedapplicationUsername:(NSString *)applicationUsername
+
+在收到 - (void)binLog:(IAPLogHandle)log; 错误时，
+可以根据想法是否进行恢复购买
+
+```
+
+
 [![CI Status](https://img.shields.io/travis/335074307@qq.com/STRIAPManagerUtils.svg?style=flat)](https://travis-ci.org/335074307@qq.com/STRIAPManagerUtils)
 [![Version](https://img.shields.io/cocoapods/v/STRIAPManagerUtils.svg?style=flat)](https://cocoapods.org/pods/STRIAPManagerUtils)
 [![License](https://img.shields.io/cocoapods/l/STRIAPManagerUtils.svg?style=flat)](https://cocoapods.org/pods/STRIAPManagerUtils)
