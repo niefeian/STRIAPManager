@@ -2,10 +2,13 @@
 
 
 
-## version 0.1.6
+## version 0.1.7
 ```
 新增接口
 - (void)restoreCompletedapplicationUsername:(NSString *)applicationUsername
+
+IAPLogHandle 增加字段 
+typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , NSError *error , NSString *applicationUsername , NSString *purchID);
 
 在收到 - (void)binLog:(IAPLogHandle)log; 错误时，
 可以根据想法是否进行恢复购买
