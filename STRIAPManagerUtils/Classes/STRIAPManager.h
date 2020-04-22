@@ -33,7 +33,7 @@ typedef void (^IAPErrorderHandle)(NSString *tmpid);
  desc 报错描述
  info 报错信息
  */
-typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , NSError *error , NSString *applicationUsername);
+typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , NSError *error , NSString *applicationUsername , NSString *purchID);
 
 
 @interface STRIAPManager : NSObject
@@ -42,6 +42,8 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
  自动续订的id ，当出现此id 是续订流程将会简化
  */
 @property(nonatomic,strong) NSString* subscribeId;
+
+@property(nonatomic,assign) NSInteger version;//如果是0 的话所有代码都会走 1 的话会少走 一点代码，比如错误返回，跟一些通知
 
 @property(nonatomic,assign) BOOL beginTimer;//开启定时器 ，默认是YES ，关闭定时器，可能会出现丢单问题
 
@@ -90,6 +92,8 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
 #pragma mark - 以下涉及到自动续订会员恢复
 - (void)restoreCompletedTransactionsPara:(id)para ;
 
+
+- (void)restoreCompletedapplicationUsername:(NSString *)applicationUsername ;
 
 //自动续订的恢复购买走这边的流程
 - (void)verifySubscribe:(IAPSubscribeHandle)handle;

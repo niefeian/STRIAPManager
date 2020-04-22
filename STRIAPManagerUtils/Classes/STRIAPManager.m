@@ -66,6 +66,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         reachability = [Reachability reachabilityForInternetConnection];
 //        _dorpLastRestores = 0;
         _subscribeId = @"";
+        _version = 0;
         __weak typeof(self) weakSelf = self;
         reachability.reachableBlock = ^(Reachability *reachability) {
             [weakSelf reloadNet];
@@ -209,7 +210,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     [request start];
 }
 
-
+- (void)restoreCompletedapplicationUsername:(NSString *)applicationUsername {
+    [[SKPaymentQueue defaultQueue] restoreCompletedTransactionsWithApplicationUsername:applicationUsername];
+}
 
 //根据 key 完结掉指定订单
 -(void)finishTransactionByTransactionIdentifier:(NSString *)transactionIdentifier{
@@ -446,14 +449,29 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 
 // 交易失败
 - (void)failedTransaction:(SKPaymentTransaction *)transaction{
-//    if (transaction.error.code != SKErrorPaymentCancelled) {
-//
-//
-////        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"网络连接失败,请稍后尝试~"];
-//    }else{
-//        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
-//    }
+
+    if (!transaction.payment.applicationUsername){
+        [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:@"" purchID:@""];
+    }else{
+        [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
+    }
+      
+    [self finishTransaction:transaction];
+    
+    //错误回调给开发，以及完结订单是每个交易失败都需要处理的事情
+    /*
+     handleActionWithType 在 _version>0 之后将不再使用
+     **/
+    if (_version > 0){
+        return;
+    }
+    
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
+    }else{
+        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
+    }
+    
     switch (transaction.error.code) {
         case SKErrorUnknown:
            [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
@@ -512,19 +530,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
              [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"购买失败，请稍后重试~"];
         break;
     }
-    if (!transaction.payment.applicationUsername){
-        [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:@""];
-    }else{
-        [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:transaction.payment.applicationUsername];
-    }
     
-    if (transaction.error.code != SKErrorPaymentCancelled) {
-        [self handleActionWithType:SIAPPurchFailed data:nil key:@"" para:@"" purchID:@""];
-    }else{
-        [self handleActionWithType:SIAPPurchCancle data:nil key:@"" para:@"" purchID:@""];
-    }
-    
-    [self finishTransaction:transaction];
+  
    
 }
 
@@ -737,17 +744,17 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 -(void)blockLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  error:(NSError *)error {
     if (_log){
         if (error) {
-            _log(transactionIdentifier,desc,error,@"");
+            _log(transactionIdentifier,desc,error,@"",@"");
         }
 //        else{
 //            _log(transactionIdentifier,desc,[[NSError alloc] init]);
 //        }
     }
 }
--(void)blockErrorLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  error:(NSError *)error  applicationUsername:(NSString *)applicationUsername {
+-(void)blockErrorLogTransactionIdentifier:(NSString *)transactionIdentifier  desc:(NSString *)desc  error:(NSError *)error  applicationUsername:(NSString *)applicationUsername   purchID:(NSString *)purchID{
     if (_log){
         if (error) {
-            _log(transactionIdentifier,desc,error,applicationUsername);
+            _log(transactionIdentifier,desc,error,applicationUsername,purchID);
         }
     }
 }
