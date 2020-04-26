@@ -72,6 +72,7 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
  */
 - (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info;
 
+
 - (void)beginPurchWithID:(NSString *)purchID applicationUsername:(NSString*)applicationUsername;
 
 
@@ -111,8 +112,10 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
 - (void)testTransactionData:(NSData *)receipt index:(NSInteger)index;
 
 #pragma mark -  订单校验 添加log 回调 更新支付状态
+//内购报错回调
 - (void)binLog:(IAPLogHandle)log;
 
+//内购流程回调
 - (void)binAppLog:(IAPLog)appLog;
 @end
 
