@@ -495,7 +495,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     
     switch (transaction.error.code) {
         case SKErrorUnknown:
-           [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
+           [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"购买失败，请稍后重试~"];
            break;
         case SKErrorClientInvalid:
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"不允许客户端发出请求"];
