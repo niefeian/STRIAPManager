@@ -27,7 +27,7 @@ typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para 
 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 typedef void (^IAPErrorderHandle)(NSString *tmpid);
-
+typedef void (^IAPLog)(NSString *log);
 /*
  transactionIdentifier 流水号
  desc 报错描述
@@ -112,6 +112,8 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
 
 #pragma mark -  订单校验 添加log 回调 更新支付状态
 - (void)binLog:(IAPLogHandle)log;
+
+- (void)binAppLog:(IAPLog)appLog;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,11 @@
 # STRIAPManagerUtils
+## version 0.2.0
+```
+新增接口
+- (void)binAppLog:(IAPLog)appLog;
 
+返回所有log
+```
 
 
 ## version 0.1.7
