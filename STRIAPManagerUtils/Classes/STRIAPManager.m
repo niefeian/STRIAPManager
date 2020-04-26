@@ -196,6 +196,15 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }
 }
 
+- (void)beginPurchWithID:(NSString *)purchID applicationUsername:(NSString*)applicationUsername {
+    _para = applicationUsername;
+    NSSet *nsset = [NSSet setWithArray:@[purchID]];
+    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
+    request.delegate = self;
+    [request start];
+}
+
+
 - (void)beginPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:para forKey:@"para"];
@@ -203,12 +212,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     [dic setValue:tmpid forKey:@"tmpid"];
     [dic setValue:info forKey:@"info"];
     _para = [self dataTOjsonString:dic];
-
-    NSSet *nsset = [NSSet setWithArray:@[purchID]];
-    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:nsset];
-    request.delegate = self;
-    [request start];
+    [self beginPurchWithID:purchID applicationUsername:[self dataTOjsonString:dic]];
 }
+
 
 - (void)restoreCompletedapplicationUsername:(NSString *)applicationUsername {
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactionsWithApplicationUsername:applicationUsername];
@@ -278,22 +284,25 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                if (transaction.transactionState == SKPaymentTransactionStatePurchased  || transaction.transactionState == SKPaymentTransactionStateRestored ) {
                    SIAPPurchType SIAPPurchState = transaction.transactionState == SKPaymentTransactionStatePurchased ? SIAPPurchSuccess : SIAPPurchRestored;
                    if (![_willDelKey containsObject:transaction.transactionIdentifier]){
-                    if (transaction.payment.productIdentifier && ![transaction.payment.productIdentifier isEqualToString:_subscribeId]){
-                        if (!transaction.payment.applicationUsername){
-                            id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
-                            if (para){
-                               [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para purchID:transaction.payment.productIdentifier];
-                            }else{
-                               if (_para){
-                                    [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para purchID:transaction.payment.productIdentifier];
-                               }else{
-                                   [self finishTransaction:transaction];
-                               }
+                        if (transaction.payment.productIdentifier ){
+                            if ( transaction.transactionState == SKPaymentTransactionStateRestored && [transaction.payment.productIdentifier isEqualToString:_subscribeId]){
+                              break;
                             }
-                        }else{
-                            [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
+                            if (!transaction.payment.applicationUsername){
+                                id para =  [[NSUserDefaults standardUserDefaults] objectForKey:transaction.payment.productIdentifier];
+                                if (para){
+                                   [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:para purchID:transaction.payment.productIdentifier];
+                                }else{
+                                   if (_para){
+                                        [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:_para purchID:transaction.payment.productIdentifier];
+                                   }else{
+                                       [self finishTransaction:transaction];
+                                   }
+                                }
+                            }else{
+                                [self handleActionWithType:SIAPPurchState data:receipt  key:transaction.transactionIdentifier para:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
+                            }
                         }
-                    }
                    }
                }else if (transaction.transactionState == SKPaymentTransactionStateFailed ){
                    [self finishTransaction:transaction];

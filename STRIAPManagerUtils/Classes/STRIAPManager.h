@@ -72,6 +72,9 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
  */
 - (void)startPurchWithID:(NSString *)purchID para:(id)para tmpid:(NSString *)tmpid  info:(id)info;
 
+- (void)beginPurchWithID:(NSString *)purchID applicationUsername:(NSString*)applicationUsername;
+
+
 //完结掉所有旧的订单 谨慎使用
 - (void)finishAllTransaction;
 
@@ -92,7 +95,7 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
 #pragma mark - 以下涉及到自动续订会员恢复
 - (void)restoreCompletedTransactionsPara:(id)para ;
 
-
+//试验结果，发现依旧会全部回来，弃用
 - (void)restoreCompletedapplicationUsername:(NSString *)applicationUsername ;
 
 //自动续订的恢复购买走这边的流程
