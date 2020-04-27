@@ -404,7 +404,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }
     [self blockErrorLogTransactionIdentifier:@"" desc:@"恢复失败" error:error applicationUsername:@"" purchID:@""];
     [self blockLogTransactionIdentifier:@"" desc:@"恢复失败" error:error];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消操作"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"恢复失败"];
     [self printf:NSStringFromSelector(_cmd)];
 }
 
@@ -420,27 +420,27 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
             productID = transaction.payment.productIdentifier;
             transactionIdentifier = transaction.transactionIdentifier;
         }
-        
-        if (byNow < transaction.transactionDate.timeIntervalSinceNow){
+        if (_subscribeId && byNow < transaction.transactionDate.timeIntervalSinceNow){
+            if ([_subscribeId isEqualToString: transaction.payment.productIdentifier]){
+                byNow =  transaction.transactionDate.timeIntervalSinceNow;
+                productID = transaction.payment.productIdentifier;
+                transactionIdentifier = transaction.transactionIdentifier;
+            }
+        }else if (byNow < transaction.transactionDate.timeIntervalSinceNow){
             byNow =  transaction.transactionDate.timeIntervalSinceNow;
             productID = transaction.payment.productIdentifier;
             transactionIdentifier = transaction.transactionIdentifier;
         }
     }
-    if (_subscribeId){
-        if (![@"" isEqualToString: productID] && [_subscribeId isEqualToString: _subscribeId]  && ![@"" isEqualToString: transactionIdentifier]){
-            NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
-            [map setValue:productID forKey:@"productID"];
-            [map setValue:transactionIdentifier forKey:@"transactionIdentifier"];
-            [purchasedItemIDs addObject:map];
-        }
-    }else{
-        if (![@"" isEqualToString: productID] && ![@"" isEqualToString: transactionIdentifier]){
-               NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
-               [map setValue:productID forKey:@"productID"];
-               [map setValue:transactionIdentifier forKey:@"transactionIdentifier"];
-               [purchasedItemIDs addObject:map];
-           }
+    
+    if ([@"" isEqualToString:transactionIdentifier]){
+        transactionIdentifier = @"1";
+    }
+    if (![@"" isEqualToString: productID] && ![@"" isEqualToString: transactionIdentifier]){
+        NSMutableDictionary *map = [[NSMutableDictionary alloc] init];
+        [map setValue:productID forKey:@"productID"];
+        [map setValue:transactionIdentifier forKey:@"transactionIdentifier"];
+        [purchasedItemIDs addObject:map];
     }
    
     if(_subhandle){
@@ -450,6 +450,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if (_isRestores){
          _isRestores = NO;
     }
+     [self printf:@"恢复完成"];
 }
 
 - (void)verifySubscribe:(IAPSubscribeHandle)handle{
