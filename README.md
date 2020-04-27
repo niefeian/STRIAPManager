@@ -1,4 +1,9 @@
 # STRIAPManagerUtils
+
+## version 0.2.4
+```
+处理内购恢复失败导致无法继续下单的问题
+```
 ## version 0.2.0
 ```
 新增接口
