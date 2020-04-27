@@ -72,6 +72,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
         [reachability startNotifier];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         _autoRestores = YES;
+        _isRestores = NO;
         //定时器循环检查 本地是否有没有完成的订单  增加一层保险 只有极端的情况下 才会出现有订单而被闲置不处理的情况
         timer =  [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(reloadErrorfinishTransaction) userInfo:nil repeats:YES];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTransactionObserver) name:ReloadTransactionObserver object:nil];
@@ -159,29 +160,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
                           }
                       }
                   }
-//                  if ([self getWillFinsh:purchID]){
-//                      double delayInSeconds = 15.0;
-//                          isError = YES;
-//                         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//                         dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-//                             if (self->isError){
-//                                 self->isError = NO;
-//                                 [self finshProductIdentifier:purchID];
-//                                 id paras =  [[NSUserDefaults standardUserDefaults] objectForKey:purchID];
-//
-//                                 if (self->_errorhandle && paras) {
-//                                      NSDictionary *dic = [self dictionaryWithJsonString:paras];
-//                                     NSString *tmpids = [dic objectForKey:@"tmpid"];
-//                                     if (tmpids){
-//                                         self->_errorhandle(tmpids);
-//                                     }
-//                                 }
-//                                 [self beginPurchWithID:purchID para:para tmpid:tmpid info:info];
-//                             }
-//
-//                         });
-//                      return;
-//                  }
             }
           
             [self beginPurchWithID:purchID para:para tmpid:tmpid info:info];
@@ -333,7 +311,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 - (void)handleActionWithType:(SIAPPurchType)type data:(NSData *)data key:(NSString *)key para:(NSString *)para purchID:(NSString *)purchID{
      [self printf:NSStringFromSelector(_cmd)];
     if (_isRestores){
-          [self printf:@"当前正在处理续订恢复,不提交其他订单"];
+        [self printf:@"当前正在处理续订恢复,不提交其他订单"];
         //当前正在处理续订恢复,不提交其他订单
         return;
     }
@@ -411,9 +389,24 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     _para = [self dataTOjsonString:dic];
     _isRestores = YES;
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
-   [self printf:NSStringFromSelector(_cmd)];
+
+    [self printf:NSStringFromSelector(_cmd)];
+    
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+//        self->_isRestores = NO;
+//    });
 }
 
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
+    if (_isRestores){
+        _isRestores = NO;
+    }
+    [self blockErrorLogTransactionIdentifier:@"" desc:@"恢复失败" error:error applicationUsername:@"" purchID:@""];
+    [self blockLogTransactionIdentifier:@"" desc:@"恢复失败" error:error];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消操作"];
+    [self printf:NSStringFromSelector(_cmd)];
+}
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
     
@@ -453,8 +446,10 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if(_subhandle){
         _subhandle(purchasedItemIDs);
     }
-     [self printf:NSStringFromSelector(_cmd)];
-    _isRestores = NO;
+    [self printf:NSStringFromSelector(_cmd)];
+    if (_isRestores){
+         _isRestores = NO;
+    }
 }
 
 - (void)verifySubscribe:(IAPSubscribeHandle)handle{
@@ -471,7 +466,9 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     }else{
         [self blockErrorLogTransactionIdentifier:@"" desc:@"交易失败 " error:transaction.error applicationUsername:transaction.payment.applicationUsername purchID:transaction.payment.productIdentifier];
     }
-      
+    if (_isRestores){
+         _isRestores = NO;
+    }
     [self finishTransaction:transaction];
     
     //错误回调给开发，以及完结订单是每个交易失败都需要处理的事情
@@ -632,11 +629,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 }
 
 
-- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-      [self blockLogTransactionIdentifier:@"" desc:@"用户取消操作" error:error];
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"用户取消操作"];
-    [self printf:NSStringFromSelector(_cmd)];
-}
 
 //请求失败
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
