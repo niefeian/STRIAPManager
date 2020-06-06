@@ -28,6 +28,8 @@ typedef void (^IAPCompletionHandle)(SIAPPurchType type , NSData *data , id para 
 typedef void (^IAPSubscribeHandle)(NSMutableArray *data);
 typedef void (^IAPErrorderHandle)(NSString *tmpid);
 typedef void (^IAPLog)(NSString *log);
+typedef void (^IAPData)(NSData *data);
+
 /*
  transactionIdentifier 流水号
  desc 报错描述
@@ -47,13 +49,18 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
 
 @property(nonatomic,assign) BOOL beginTimer;//开启定时器 ，默认是YES ，关闭定时器，可能会出现丢单问题
 
-//是否自动尝试恢复订单默认yes 自动续订 需要设置为false
+//是否自动尝试恢复订单默认yes 自动续订 需要设置为false 因为自动续订会一直恢复回来，并且数据特别多
 - (void)autoRestoreCompletedTransactions:(BOOL)autoRestores;
+
+//恢复某种商品的订单  purchID 为商品id handle 为恢复后的数据 sdk 先简单处理，获得恢复后数据直接返回 后续再过滤
+- (void)restoreCompletedTransactions:(NSString *)purchID handle:(IAPData)handle;
 
 - (void)setErrorderHandle:(IAPErrorderHandle)handle;
 
+- (void)finishTransactionByPurchID:(NSString *)purchID;
 
--(void)finishTransactionByPurchID:(NSString *)purchID;
+
+
 /*
     单利
  */
@@ -117,6 +124,8 @@ typedef void (^IAPLogHandle)(NSString *transactionIdentifier ,NSString * desc , 
 
 //内购流程回调
 - (void)binAppLog:(IAPLog)appLog;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

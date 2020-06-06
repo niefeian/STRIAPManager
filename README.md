@@ -1,5 +1,13 @@
 # STRIAPManagerUtils
 
+
+## version 0.2.5
+```
+新增接口
+//恢复某种商品的订单  purchID 为商品id handle 为恢复后的数据 sdk 先简单处理，获得恢复后数据直接返回 后续再过滤
+-(void)restoreCompletedTransactions:(NSString *)purchID handle:(IAPData)handle;
+```
+
 ## version 0.2.4
 ```
 处理内购恢复失败导致无法继续下单的问题
@@ -11,8 +19,6 @@
 
 返回所有log
 ```
-
-
 ## version 0.1.7
 ```
 新增接口
