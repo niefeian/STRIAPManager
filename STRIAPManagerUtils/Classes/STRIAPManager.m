@@ -647,7 +647,6 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 //请求失败
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"showLondTip" object:@"当前网络不给力,请稍后再试~"];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"AsyncDisappear" object:@"当前网络不给力,请稍后再试~"];
    #if DEBUG
         NSLog(@"------------------错误-----------------:%@", error);
        [self blockLogTransactionIdentifier:@"" desc:@"唤醒内购失败 " error:error];
