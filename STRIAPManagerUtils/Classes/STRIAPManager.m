@@ -66,14 +66,8 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
     if (self) {
         _finishKeys = [[NSMutableArray alloc] init];
         _willDelKey = [[NSMutableArray alloc] init];
-//        reachability = [Reachability reachabilityForInternetConnection];
         _subscribeId = @"";
         _version = 0;
-//        __weak typeof(self) weakSelf = self;
-//        reachability.reachableBlock = ^(Reachability *reachability) {
-//            [weakSelf reloadNet];
-//        };
-//        [reachability startNotifier];
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         _autoRestores = YES;
         _isRestores = NO;
@@ -116,9 +110,7 @@ NSNotificationName const ReloadTransactionObserver = @"ReloadTransactionObserver
 }
 
 -(void)reloadErrorfinishTransaction{
-//    if (reachability.isReachable){
-          [self reloadTransactionObserver];
-//    }
+    [self reloadTransactionObserver];
 }
 
 #pragma mark - 设置订单信息的回调
